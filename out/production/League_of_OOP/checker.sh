@@ -55,7 +55,7 @@ function checkTest
 
 function checkStyle
 {
-	java -jar checker09/checkstyle/checkstyle-7.3-all.jar -c checker09/checkstyle/poo_checks.xml *  > checkstyle.txt
+	java -jar checker/checkstyle/checkstyle-7.3-all.jar -c checker/checkstyle/poo_checks.xml *  > checkstyle.txt
 
 	YOUR_CHECKSTYLE=`cat checkstyle.txt`
 

@@ -8,6 +8,8 @@ import gameAssets.abilityAssets.SecondaryEffects;
 import gameAssets.mapAssets.LandType;
 import gameAssets.mapAssets.GameMap;
 import gameAssets.playerAssets.Player;
+import gameAssets.playerAssets.PlayerType;
+import gameAssets.playerAssets.implementedPlayers.Wizard;
 import helpers.IntegerTulep;
 
 import java.util.HashMap;
@@ -36,8 +38,23 @@ public final class Paralysis implements Ability, SecondaryEffects {
                 new PerpetualEffects(transmitter,transmitter.getLevel(),receiver,
                 gameMap,position,this,
                         roundsToEndure +
-                         (gameMap.getMapCell(position) == LandType.Land ? bonusLandOvertime : 0)
+                         (gameMap.getMapCell(position) == LandType.Woods ? bonusLandOvertime : 0)
                          , SEffectType.Paralysis));
+
+
+
+
+        if(receiver.getType() == PlayerType.Wizard) {
+            long wizardDamage = Math.round(levelDamage *
+                    Modifiers.getInstance().getLandModifiers().
+                            get(transmitter.getType()).get(gameMap.getMapCell(position)));
+
+            Wizard harry = (Wizard) receiver;
+            if(harry.getReceivedDamage() == -1)
+                harry.prepareDamage(Math.toIntExact(wizardDamage));
+            else
+                harry.incrementDamage(Math.toIntExact(wizardDamage));
+        }
     }
 
     public void applySecondaryEffects(Player transmitter, int initialLevel, Player receiver,

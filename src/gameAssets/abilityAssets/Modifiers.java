@@ -37,24 +37,24 @@ public class Modifiers {
         landModifiers.put(PlayerType.Knight, knightLModifiers);
 
         HashMap<LandType, Float> pyromancerLModifiers = new HashMap<>();
-        knightLModifiers.put(LandType.Land, 1.0f);
-        knightLModifiers.put(LandType.Volcanic, 1.25f);
-        knightLModifiers.put(LandType.Desert, 1.0f);
-        knightLModifiers.put(LandType.Woods, 1.0f);
+        pyromancerLModifiers.put(LandType.Land, 1.0f);
+        pyromancerLModifiers.put(LandType.Volcanic, 1.25f);
+        pyromancerLModifiers.put(LandType.Desert, 1.0f);
+        pyromancerLModifiers.put(LandType.Woods, 1.0f);
         landModifiers.put(PlayerType.Pyromancer, pyromancerLModifiers);
 
         HashMap<LandType, Float> wizardLModifiers = new HashMap<>();
-        knightLModifiers.put(LandType.Land, 1.0f);
-        knightLModifiers.put(LandType.Volcanic, 1.0f);
-        knightLModifiers.put(LandType.Desert, 1.10f);
-        knightLModifiers.put(LandType.Woods, 1.0f);
+        wizardLModifiers.put(LandType.Land, 1.0f);
+        wizardLModifiers.put(LandType.Volcanic, 1.0f);
+        wizardLModifiers.put(LandType.Desert, 1.10f);
+        wizardLModifiers.put(LandType.Woods, 1.0f);
         landModifiers.put(PlayerType.Wizard, wizardLModifiers);
 
         HashMap<LandType, Float> rogueLModifiers = new HashMap<>();
-        knightLModifiers.put(LandType.Land, 1.0f);
-        knightLModifiers.put(LandType.Volcanic, 1.0f);
-        knightLModifiers.put(LandType.Desert, 1.0f);
-        knightLModifiers.put(LandType.Woods, 1.15f);
+        rogueLModifiers.put(LandType.Land, 1.0f);
+        rogueLModifiers.put(LandType.Volcanic, 1.0f);
+        rogueLModifiers.put(LandType.Desert, 1.0f);
+        rogueLModifiers.put(LandType.Woods, 1.15f);
         landModifiers.put(PlayerType.Rogue, rogueLModifiers);
     }
 
@@ -117,7 +117,7 @@ public class Modifiers {
         deflect.put(PlayerType.Rogue, 1.2f);
         deflect.put(PlayerType.Wizard, 0.0f);
 
-        raceModifiers.put(PlayerType.Rogue, new ArrayList<>(Arrays.asList(drain, deflect)));
+        raceModifiers.put(PlayerType.Wizard, new ArrayList<>(Arrays.asList(drain, deflect)));
     }
 
     public HashMap<PlayerType, HashMap<LandType, Float>> getLandModifiers() {

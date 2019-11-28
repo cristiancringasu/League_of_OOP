@@ -1,4 +1,4 @@
-package gameAssets.GameEngine;
+package GameEngine;
 
 import gameAssets.abilityAssets.PerpetualEffects;
 import gameAssets.abilityAssets.SEffectType;
@@ -67,13 +67,16 @@ public class Round {
     public void play(GameInput gameInput) {
         for (int index =  0; index < gameInput.getPlayersNo(); index ++) {
             Player currentPlayer = gameInput.getPlayers().get(index);
-            Character move = gameInput.getMoves().get(index).charAt(roundCounter);
+            Character move = gameInput.getMoves().get(roundCounter).charAt(index);
             makeMove(currentPlayer,move);
         }
 
         List<Player> sEffects = new ArrayList<>(overtimeEffects.keySet());
         for (int i = 0; i < sEffects.size(); i++) {
             Player affectedPlayer = sEffects.get(i);
+            if(affectedPlayer.getHP() == 348) {
+                int j = 9;
+            }
             PerpetualEffects effect = overtimeEffects.get(affectedPlayer);
             effect.applyEffects();
         }
@@ -99,6 +102,11 @@ public class Round {
                         playerI.fight(playerJ, gameInput.getGameMap(), overtimeEffects);
                         playerJ.fight(playerI, gameInput.getGameMap(), overtimeEffects);
                     }
+                    if(playerJ.getHP() <= 0 && playerI.getHP() >= 0)
+                        playerI.haveKilledOpponent(playerJ);
+
+                    if(playerI.getHP() <= 0 && playerJ.getHP() >= 0)
+                        playerJ.haveKilledOpponent(playerI);
                 }
             }
         }

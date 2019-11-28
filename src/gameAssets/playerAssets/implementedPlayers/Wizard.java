@@ -15,9 +15,16 @@ public final class Wizard extends Player{
     }
 
     private int receivedDamage = -1;
+    public int getReceivedDamage() {
+        return receivedDamage;
+    }
     public void prepareDamage(int damage) {
         receivedDamage = damage;
     }
+    public void incrementDamage(int damage) {
+        receivedDamage += damage;
+    }
+
     public void fight(Player opponent, GameMap gameMap,
                   HashMap<Player, PerpetualEffects> overtimeEffects) {
         AbilityApplier.getInstance().apply(this,opponent,

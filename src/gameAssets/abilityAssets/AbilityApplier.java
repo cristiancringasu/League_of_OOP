@@ -50,6 +50,7 @@ public class AbilityApplier { //Follows a visitor Pattern
         Deflect.getInstance().setReceivedDamage(receivedDamage);
         Deflect.getInstance().applyAbility(transmitter,receiver,gameMap,position,overtimeEffects);
         Deflect.getInstance().setReceivedDamage(-1);
+        transmitter.prepareDamage(-1);
     }
 
     public void apply(Knight transmitter, Player receiver,

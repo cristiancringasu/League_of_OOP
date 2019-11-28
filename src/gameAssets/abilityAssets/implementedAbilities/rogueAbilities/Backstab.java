@@ -6,6 +6,8 @@ import gameAssets.abilityAssets.PerpetualEffects;
 import gameAssets.mapAssets.LandType;
 import gameAssets.mapAssets.GameMap;
 import gameAssets.playerAssets.Player;
+import gameAssets.playerAssets.PlayerType;
+import gameAssets.playerAssets.implementedPlayers.Wizard;
 import helpers.IntegerTulep;
 
 import java.util.HashMap;
@@ -34,10 +36,24 @@ public final class Backstab implements Ability {
             critical = 1.0f;
 
         long levelDamage = initialDamage + levelModifier * transmitter.getLevel();
-        long damage = Math.round(levelDamage
+        long damage = Math.round(levelDamage * critical
                 * Modifiers.getInstance().getModifiers(transmitter,receiver,gameMap,0));
 
         receiver.receiveDamage(Math.toIntExact(damage));
+
+
+
+        if(receiver.getType() == PlayerType.Wizard) {
+            long wizardDamage = Math.round(levelDamage * critical *
+                    Modifiers.getInstance().getLandModifiers().
+                            get(transmitter.getType()).get(gameMap.getMapCell(position)));
+
+            Wizard harry = (Wizard) receiver;
+            if(harry.getReceivedDamage() == -1)
+                harry.prepareDamage(Math.toIntExact(wizardDamage));
+            else
+                harry.incrementDamage(Math.toIntExact(wizardDamage));
+        }
     }
 
     public static Backstab getInstance() {

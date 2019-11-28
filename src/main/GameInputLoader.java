@@ -32,10 +32,11 @@ public final class GameInputLoader {
             size = new IntegerTulep(fs.nextInt(), fs.nextInt());
             GameMap.initInstance(size);
 
-            for (int i = 0; i < size.getFirst(); i++)
+            for (int i = 0; i < size.getFirst(); i++) {
+                String word = fs.nextWord();
                 for (int j = 0; j < size.getSecond(); j++)
-                    GameMap.getInstance().setMapCellCharacter(new IntegerTulep(i,j),
-                            fs.nextWord().charAt(0));
+                    GameMap.getInstance().setMapCellCharacter(new IntegerTulep(i, j),word.charAt(j));
+            }
 
 
             noPlayers = fs.nextInt();

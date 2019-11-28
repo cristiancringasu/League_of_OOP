@@ -43,10 +43,14 @@ public abstract class Player {
 
     private void updateLevel() {
         int not_incrementedLevel = ((XP - 250) / 50);
-        if(not_incrementedLevel < 0)
+        if(not_incrementedLevel < 0) { //Haven't reached 250XP -> lvl.1
             this.level = 0;
-        else
+        } else {
+            int oldLevel = this.level;
             this.level = not_incrementedLevel + 1;
+            if(oldLevel != this.level)
+                recoverHP();
+        }
     }
 
     public int getXP() {

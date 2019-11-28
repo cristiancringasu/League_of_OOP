@@ -7,6 +7,8 @@ import gameAssets.abilityAssets.SEffectType;
 import gameAssets.abilityAssets.SecondaryEffects;
 import gameAssets.mapAssets.GameMap;
 import gameAssets.playerAssets.Player;
+import gameAssets.playerAssets.PlayerType;
+import gameAssets.playerAssets.implementedPlayers.Wizard;
 import helpers.IntegerTulep;
 
 import java.util.HashMap;
@@ -32,6 +34,20 @@ public final class Slam implements Ability, SecondaryEffects {
         overtimeEffects.put(receiver,
                 new PerpetualEffects(transmitter,transmitter.getLevel(),receiver,
                 gameMap,position,this,roundsToEndure, SEffectType.Paralysis));
+
+
+
+        if(receiver.getType() == PlayerType.Wizard) {
+            long wizardDamage = Math.round(levelDamage *
+                    Modifiers.getInstance().getLandModifiers().
+                            get(transmitter.getType()).get(gameMap.getMapCell(position)));
+
+            Wizard harry = (Wizard) receiver;
+            if(harry.getReceivedDamage() == -1)
+                harry.prepareDamage(Math.toIntExact(wizardDamage));
+            else
+                harry.incrementDamage(Math.toIntExact(wizardDamage));
+        }
     }
 
     public void applySecondaryEffects(Player transmitter, int initialLevel, Player receiver,
