@@ -1,11 +1,11 @@
 package main;
 
-import gameAssets.mapAssets.GameMap;
-import gameAssets.playerAssets.Player;
+import assets.mapAssets_.GameMap;
+import assets.playerAssets_.Player;
 
 import java.util.List;
 
-public class GameInput {
+public final class GameInput {
     // DO NOT MODIFY
     private final GameMap mGameMap;
     private final List<String> mMovesOrder;
@@ -34,15 +34,15 @@ public class GameInput {
         return mGameMap;
     }
 
-    public final List<String> getMoves() {
+    public List<String> getMoves() {
         return mMovesOrder;
     }
 
-    public final List<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return mPlayersOrder;
     }
 
-    public final int getRounds() {
+    public int getRounds() {
         return mRounds;
     }
 
@@ -50,7 +50,7 @@ public class GameInput {
         return mPlayersNo;
     }
 
-    public final boolean isValidInput() {
+    public boolean isValidInput() {
         boolean membersInstantiated = mMovesOrder != null && mPlayersOrder != null;
         boolean membersNotEmpty = mMovesOrder.size() > 0 && mPlayersOrder.size() > 0 && mRounds > 0;
 

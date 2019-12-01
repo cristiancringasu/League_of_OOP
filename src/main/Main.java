@@ -1,8 +1,7 @@
 package main;
 
-import GameEngine.Round;
-import GameEngine.Score;
-import helpers.Debuger;
+import engine.Round;
+import engine.Score;
 
 public final class Main {
 
@@ -23,7 +22,7 @@ public final class Main {
         while (rounds > 0) {
             Round.getInstance().play(gameInput);
             //Debuger.getInstance().printPlayers(gameInput);
-            rounds --;
+            rounds--;
         }
         //Debuger.getInstance().printPlayers(gameInput);
         //Score.getInstance().printScore(gameInput);

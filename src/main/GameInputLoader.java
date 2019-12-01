@@ -1,9 +1,9 @@
 package main;
 
 import fileio.FileSystem;
-import gameAssets.mapAssets.GameMap;
-import gameAssets.playerAssets.Player;
-import gameAssets.playerAssets.PlayerFactory;
+import assets.mapAssets_.GameMap;
+import assets.playerAssets_.Player;
+import assets.playerAssets_.PlayerFactory;
 import helpers.IntegerTulep;
 
 import java.util.ArrayList;
@@ -34,8 +34,10 @@ public final class GameInputLoader {
 
             for (int i = 0; i < size.getFirst(); i++) {
                 String word = fs.nextWord();
-                for (int j = 0; j < size.getSecond(); j++)
-                    GameMap.getInstance().setMapCellCharacter(new IntegerTulep(i, j),word.charAt(j));
+                for (int j = 0; j < size.getSecond(); j++) {
+                    GameMap.getInstance().setMapCellCharacter(new IntegerTulep(i, j),
+                                                                     word.charAt(j));
+                }
             }
 
 
