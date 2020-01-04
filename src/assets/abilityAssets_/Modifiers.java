@@ -166,12 +166,22 @@ public final class Modifiers {
         return raceModifiers;
     }
 
+    public Float getRaceModWthSelfMod(final Player sender, final Player receiver,
+                                      final int abilityID) {
+        Float baseMod = raceModifiers.get(sender.getType()).get(abilityID).get(receiver.getType());
+        Float selfMod = 0.0f;
+        if(baseMod != 1.0f) {
+            selfMod = sender.getSelfModifiers(abilityID);
+        }
+        return baseMod + selfMod;
+    }
+
     public Float getModifiers(final Player sender, final Player receiver,
                               final GameMap gameMap, final int abilityID) {
 
                return
                 landModifiers.get(sender.getType()).get(gameMap.getMapCell(sender.getPosition()))
-                * raceModifiers.get(sender.getType()).get(abilityID).get(receiver.getType());
+                * getRaceModWthSelfMod(sender, receiver, abilityID);
     }
 
     public Float getModifiersWPOS(final Player sender, final Player receiver,
@@ -179,7 +189,7 @@ public final class Modifiers {
                                   final int abilityID) {
 
         return landModifiers.get(sender.getType()).get(gameMap.getMapCell(position))
-                * raceModifiers.get(sender.getType()).get(abilityID).get(receiver.getType());
+                * getRaceModWthSelfMod(sender, receiver, abilityID);
     }
 
     public static Modifiers getInstance() {

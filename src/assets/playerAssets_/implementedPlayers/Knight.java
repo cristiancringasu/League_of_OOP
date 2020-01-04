@@ -7,6 +7,8 @@ import assets.angelsAssets_.DispatchPlayerSelector;
 import assets.mapAssets_.GameMap;
 import assets.playerAssets_.Player;
 import assets.playerAssets_.PlayerType;
+import assets.strategiesAssets_.implementedStrategies.knightStrategies.KnightDeffensiveStrategy;
+import assets.strategiesAssets_.implementedStrategies.knightStrategies.KnightOffensiveStrategy;
 import helpers.IntegerTulep;
 
 import java.util.HashMap;
@@ -30,5 +32,17 @@ public final class Knight extends Player {
     public void acceptAngel(Angel angel)  {
         DispatchPlayerSelector.selectApply(this, angel);
         //Pseudo-DoubleDispatch
+    }
+
+    @Override
+    public void selectStrategy() {
+        int currentHP = getHp();
+        int maxHP = getMaxHP();
+        if (currentHP > maxHP/3 && currentHP < maxHP/2) {
+            setStrategy(new KnightOffensiveStrategy());
+        }
+        if (currentHP < maxHP/3) {
+            setStrategy(new KnightDeffensiveStrategy());
+        }
     }
 }

@@ -7,6 +7,10 @@ import assets.angelsAssets_.DispatchPlayerSelector;
 import assets.mapAssets_.GameMap;
 import assets.playerAssets_.Player;
 import assets.playerAssets_.PlayerType;
+import assets.strategiesAssets_.implementedStrategies.rogueStrategies.RogueDeffensiveStrategy;
+import assets.strategiesAssets_.implementedStrategies.rogueStrategies.RogueOffensiveStrategy;
+import assets.strategiesAssets_.implementedStrategies.wizardStrategies.WizardDeffensiveStrategy;
+import assets.strategiesAssets_.implementedStrategies.wizardStrategies.WizardOffensiveStrategy;
 import helpers.IntegerTulep;
 
 import java.util.HashMap;
@@ -43,5 +47,17 @@ public final class Wizard extends Player {
     public void acceptAngel(Angel angel)  {
         DispatchPlayerSelector.selectApply(this, angel);
         //Pseudo-DoubleDispatch
+    }
+
+    @Override
+    public void selectStrategy() {
+        int currentHP = getHp();
+        int maxHP = getMaxHP();
+        if (currentHP > maxHP/4 && currentHP < maxHP/2) {
+            setStrategy(new WizardOffensiveStrategy());
+        }
+        if (currentHP < maxHP/4) {
+            setStrategy(new WizardDeffensiveStrategy());
+        }
     }
 }

@@ -7,6 +7,10 @@ import assets.angelsAssets_.DispatchPlayerSelector;
 import assets.mapAssets_.GameMap;
 import assets.playerAssets_.Player;
 import assets.playerAssets_.PlayerType;
+import assets.strategiesAssets_.implementedStrategies.pyromancerStrategies.PyromancerDeffensiveStrategy;
+import assets.strategiesAssets_.implementedStrategies.pyromancerStrategies.PyromancerOffensiveStrategy;
+import assets.strategiesAssets_.implementedStrategies.rogueStrategies.RogueDeffensiveStrategy;
+import assets.strategiesAssets_.implementedStrategies.rogueStrategies.RogueOffensiveStrategy;
 import helpers.IntegerTulep;
 
 import java.util.HashMap;
@@ -35,5 +39,17 @@ public final class Rogue extends Player {
     public void acceptAngel(Angel angel)  {
         DispatchPlayerSelector.selectApply(this, angel);
         //Pseudo-DoubleDispatch
+    }
+
+    @Override
+    public void selectStrategy() {
+        int currentHP = getHp();
+        int maxHP = getMaxHP();
+        if (currentHP > maxHP/7 && currentHP < maxHP/5) {
+            setStrategy(new RogueOffensiveStrategy());
+        }
+        if (currentHP < maxHP/7) {
+            setStrategy(new RogueDeffensiveStrategy());
+        }
     }
 }

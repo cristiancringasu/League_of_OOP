@@ -161,4 +161,29 @@ public final class Constants {
     public static final int  XA_PYROMANCER_XP = 50;
     public static final int  XA_ROGUE_XP = 40;
     public static final int  XA_WIZARD_XP = 60;
+
+    //__________________________STRATEGIES___________________________\\
+    //KNIGHT_STRATEGIES
+    public static final float ST_A_KNIGHT_MODIFICATION = 0.5f;
+    public static final int ST_A_KNIGHT_HP_PER = 5;
+    public static final float  ST_D_KNIGHT_MODIFICATION = 0.2f;
+    public static final int ST_D_KNIGHT_HP_PER = 4;
+
+    //PYROMANCER_STRATEGIES
+    public static final float ST_A_PYROMANCER_MODIFICATION = 0.7f;
+    public static final int ST_A_PYROMANCER_HP_PER = 4;
+    public static final float  ST_D_PYROMANCER_MODIFICATION = 0.3f;
+    public static final int ST_D_PYROMANCER_HP_PER = 3;
+
+    //ROGUE_STRATEGIES
+    public static final float ST_A_ROGUE_MODIFICATION = 0.4f;
+    public static final int ST_A_ROGUE_HP_PER = 7;
+    public static final float  ST_D_ROGUE_MODIFICATION = 0.1f;
+    public static final int ST_D_ROGUE_HP_PER = 2;
+
+    //WIZARD_STRATEGIES
+    public static final float ST_A_WIZARD_MODIFICATION = 0.6f;
+    public static final int ST_A_WIZARD_HP_PER = 10;
+    public static final float  ST_D_WIZARD_MODIFICATION = 0.2f;
+    public static final int ST_D_WIZARD_HP_PER = 5;
 }

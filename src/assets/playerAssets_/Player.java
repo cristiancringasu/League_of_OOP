@@ -1,12 +1,16 @@
 package assets.playerAssets_;
 
+import assets.abilityAssets_.Modifiers;
 import assets.abilityAssets_.PerpetualEffects;
 import assets.angelsAssets_.Angel;
 import assets.angelsAssets_.DispatchPlayerSelector;
 import assets.mapAssets_.GameMap;
+import assets.strategiesAssets_.PlayerStrategy;
 import helpers.IntegerTulep;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import static helpers.Constants.BASE_XP;
@@ -23,7 +27,8 @@ public abstract class Player {
     private int initialHP;
     private int levelingHP;
     private IntegerTulep position;
-    private ArrayList<Float> selfModifiers = new ArrayList<>();
+    private ArrayList<Float> selfModifiers;
+    private PlayerStrategy strategy;
 
     public Player(final PlayerType type, final int hp, final int initialHP, final int levelingHP,
                   final IntegerTulep position) {
@@ -32,6 +37,7 @@ public abstract class Player {
         this.initialHP = initialHP;
         this.levelingHP = levelingHP;
         this.position = position;
+        this.selfModifiers = new ArrayList<>(Arrays.asList(0.0f,0.0f));
     }
 
     /**
@@ -209,4 +215,23 @@ public abstract class Player {
      * double dispatch: angel visits the player
      */
     public abstract void acceptAngel(final Angel angel);
+
+    /**
+     * @return strategy
+     */
+    public PlayerStrategy getStrategy() {
+        return strategy;
+    }
+
+    /**
+     * @param strategy sets the new strategy
+     */
+    public void setStrategy(PlayerStrategy strategy) {
+        this.strategy = strategy;
+    }
+
+    /**
+     * dinamically selects strategy
+     */
+    public abstract void selectStrategy();
 }
