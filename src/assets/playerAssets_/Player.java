@@ -1,9 +1,12 @@
 package assets.playerAssets_;
 
 import assets.abilityAssets_.PerpetualEffects;
+import assets.angelsAssets_.Angel;
+import assets.angelsAssets_.DispatchPlayerSelector;
 import assets.mapAssets_.GameMap;
 import helpers.IntegerTulep;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static helpers.Constants.BASE_XP;
@@ -20,6 +23,7 @@ public abstract class Player {
     private int initialHP;
     private int levelingHP;
     private IntegerTulep position;
+    private ArrayList<Float> selfModifiers = new ArrayList<>();
 
     public Player(final PlayerType type, final int hp, final int initialHP, final int levelingHP,
                   final IntegerTulep position) {
@@ -75,6 +79,11 @@ public abstract class Player {
         }
     }
 
+    public void forcedLevelUp() {
+        xp = BASE_XP + LEVEL_UP_XP * level;
+        level += 1;
+    }
+
     /**
      * Method that returns XP.
      * @return XP
@@ -91,7 +100,7 @@ public abstract class Player {
         this.xp = xp;
     }
 
-    private void receiveXP(final int newXp) {
+    public void receiveXP(final int newXp) {
         this.xp += newXp;
         updateLevel();
     }
@@ -129,6 +138,14 @@ public abstract class Player {
     }
 
     /**
+     * Method that recover hp from HP.
+     * @param hp = +hp
+     */
+    public void receiveHP(final int hp) {
+        this.hp += hp;
+    }
+
+    /**
      * Method that restore hp to max hp.
      */
     public void recoverHP() {
@@ -162,4 +179,34 @@ public abstract class Player {
         receiveXP(max(0, STEP_XP_KILL - (level - opponent.getLevel()) * MULTIPLIER_XP_KILL));
     }
 
+    /**
+     * getter for modifiers
+     * @return modifiers
+     */
+    public ArrayList<Float> getSelfModifiers() {
+        return selfModifiers;
+    }
+
+    /**
+     * getter for modifiers dor ability
+     * @return modifiers for ability
+     */
+    public Float getSelfModifiers(final int index) {
+        return selfModifiers.get(index);
+    }
+
+    /**
+     * setter for modifiers
+     * used by angels and in players strategies
+     */
+    public void setSelfModifiers(final int index, final Float modification) {
+        Float oldModifier = this.selfModifiers.get(index);
+        Float newModifier = oldModifier + modification;
+        this.selfModifiers.set(index,newModifier);
+    }
+
+    /**
+     * double dispatch: angel visits the player
+     */
+    public abstract void acceptAngel(final Angel angel);
 }

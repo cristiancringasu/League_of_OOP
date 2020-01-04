@@ -2,6 +2,8 @@ package assets.playerAssets_.implementedPlayers;
 
 import assets.abilityAssets_.AbilityApplier;
 import assets.abilityAssets_.PerpetualEffects;
+import assets.angelsAssets_.Angel;
+import assets.angelsAssets_.DispatchPlayerSelector;
 import assets.mapAssets_.GameMap;
 import assets.playerAssets_.Player;
 import assets.playerAssets_.PlayerType;
@@ -22,5 +24,11 @@ public final class Knight extends Player {
                       final HashMap<Player, PerpetualEffects> overtimeEffects) {
         AbilityApplier.getInstance().apply(this, opponent,
                 gameMap, getPosition(), overtimeEffects);
+    }
+
+    @Override
+    public void acceptAngel(Angel angel)  {
+        DispatchPlayerSelector.selectApply(this, angel);
+        //Pseudo-DoubleDispatch
     }
 }
