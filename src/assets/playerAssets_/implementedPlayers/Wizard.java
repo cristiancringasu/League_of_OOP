@@ -7,6 +7,7 @@ import assets.angelsAssets_.DispatchPlayerSelector;
 import assets.mapAssets_.GameMap;
 import assets.playerAssets_.Player;
 import assets.playerAssets_.PlayerType;
+import assets.strategiesAssets_.DoNothingStrategy;
 import assets.strategiesAssets_.implementedStrategies.rogueStrategies.RogueDeffensiveStrategy;
 import assets.strategiesAssets_.implementedStrategies.rogueStrategies.RogueOffensiveStrategy;
 import assets.strategiesAssets_.implementedStrategies.wizardStrategies.WizardDeffensiveStrategy;
@@ -55,9 +56,12 @@ public final class Wizard extends Player {
         int maxHP = getMaxHP();
         if (currentHP > maxHP/4 && currentHP < maxHP/2) {
             setStrategy(new WizardOffensiveStrategy());
+            return;
         }
-        if (currentHP < maxHP/4) {
+        if (currentHP < maxHP/4 && currentHP > 0) {
             setStrategy(new WizardDeffensiveStrategy());
+            return;
         }
+        setStrategy(new DoNothingStrategy());
     }
 }

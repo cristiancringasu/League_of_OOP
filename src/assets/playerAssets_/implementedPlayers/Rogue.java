@@ -7,6 +7,7 @@ import assets.angelsAssets_.DispatchPlayerSelector;
 import assets.mapAssets_.GameMap;
 import assets.playerAssets_.Player;
 import assets.playerAssets_.PlayerType;
+import assets.strategiesAssets_.DoNothingStrategy;
 import assets.strategiesAssets_.implementedStrategies.pyromancerStrategies.PyromancerDeffensiveStrategy;
 import assets.strategiesAssets_.implementedStrategies.pyromancerStrategies.PyromancerOffensiveStrategy;
 import assets.strategiesAssets_.implementedStrategies.rogueStrategies.RogueDeffensiveStrategy;
@@ -47,9 +48,12 @@ public final class Rogue extends Player {
         int maxHP = getMaxHP();
         if (currentHP > maxHP/7 && currentHP < maxHP/5) {
             setStrategy(new RogueOffensiveStrategy());
+            return;
         }
-        if (currentHP < maxHP/7) {
+        if (currentHP < maxHP/7 && currentHP > 0) {
             setStrategy(new RogueDeffensiveStrategy());
+            return;
         }
+        setStrategy(new DoNothingStrategy());
     }
 }

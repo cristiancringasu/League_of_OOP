@@ -7,6 +7,7 @@ import assets.angelsAssets_.DispatchPlayerSelector;
 import assets.mapAssets_.GameMap;
 import assets.playerAssets_.Player;
 import assets.playerAssets_.PlayerType;
+import assets.strategiesAssets_.DoNothingStrategy;
 import assets.strategiesAssets_.implementedStrategies.knightStrategies.KnightDeffensiveStrategy;
 import assets.strategiesAssets_.implementedStrategies.knightStrategies.KnightOffensiveStrategy;
 import helpers.IntegerTulep;
@@ -40,9 +41,12 @@ public final class Knight extends Player {
         int maxHP = getMaxHP();
         if (currentHP > maxHP/3 && currentHP < maxHP/2) {
             setStrategy(new KnightOffensiveStrategy());
+            return;
         }
-        if (currentHP < maxHP/3) {
+        if (currentHP < maxHP/3 && currentHP > 0) {
             setStrategy(new KnightDeffensiveStrategy());
+            return;
         }
+        setStrategy(new DoNothingStrategy());
     }
 }

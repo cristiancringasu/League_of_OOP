@@ -7,6 +7,7 @@ import assets.angelsAssets_.DispatchPlayerSelector;
 import assets.mapAssets_.GameMap;
 import assets.playerAssets_.Player;
 import assets.playerAssets_.PlayerType;
+import assets.strategiesAssets_.DoNothingStrategy;
 import assets.strategiesAssets_.implementedStrategies.knightStrategies.KnightDeffensiveStrategy;
 import assets.strategiesAssets_.implementedStrategies.knightStrategies.KnightOffensiveStrategy;
 import assets.strategiesAssets_.implementedStrategies.pyromancerStrategies.PyromancerDeffensiveStrategy;
@@ -43,9 +44,12 @@ public final class Pyromancer extends Player {
         int maxHP = getMaxHP();
         if (currentHP > maxHP/4 && currentHP < maxHP/3) {
             setStrategy(new PyromancerOffensiveStrategy());
+            return;
         }
-        if (currentHP < maxHP/4) {
+        if (currentHP < maxHP/4 && currentHP > 0) {
             setStrategy(new PyromancerDeffensiveStrategy());
+            return;
         }
+        setStrategy(new DoNothingStrategy());
     }
 }
