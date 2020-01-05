@@ -49,4 +49,33 @@ abilitatile, pe care le efectueaza.
 Acum, da , am terminat!
     
 
+EDIT: UPDATE ETAPA 2_________________
+
+Am adaugat:
+
+* Angel: Entitate noua care adauga niste bonusuri sau nu chiar la jucatori : XP, modificatori, HP,  etc
+        La aceasta entitate se adauga o clasa cu rol de visitor: DispatchPlayerSelector, care va selecta o actiune 
+        in functie de inger si player, deci apare o noua metoda in Player: acceptAngel (abstracta, implementate de 
+        fiecare player in parte).
+        
+        Este subclasata de fiecare tip de inger, si implementeaza o actiune pentru fiecare tip de jucator.
+        
+* AngelFactory: fabrica de ingeri, stie sa adauge si un observar la fiecare nou inger creeat, adica pe Marele HocusPocus
+
+* PlayerStrategy: interfata, foloseste desgn pattern ul Strategy pentru a selectea dinamic strategia la runtime.
+                  Este implementata de fiecare strategie corespunzatoare fiecarui jucator in parte, identificandu-se
+                  pentru un jucator 2 tipuri de strategii: Offensive si Deffensive.
+                  
+                  Astfel apare in clasa Player metoda selectStrategy(), abstracta, implementate unic de fiecare jucator.
+                  
+* GreatMagician, observator la tot ce se intampla in joc, afiseaza in fisier toate evenimentele importante(bataie, 
+                        sange, inger, etc)
+                        
+Am schimbat clasele GameInput, GameInputLoader si Round pentru a linka noile feature uri in joc (citire, aplicare, 
+                    stocare, etc)
+                    
+Am schimbat unele abilitati si logici de rezolvare (aproximari, etc, in functie de rezultatul pe teste).
+
+Tema muncitoreasca.. NU APRECIEZ ASA CEVA!!!
+
 
