@@ -6,15 +6,6 @@ import assets.playerAssets_.implementedPlayers.Pyromancer;
 import assets.playerAssets_.implementedPlayers.Rogue;
 import assets.playerAssets_.implementedPlayers.Wizard;
 import helpers.IntegerTulep;
-
-import static helpers.Constants.DR_KNIGHT_HP;
-import static helpers.Constants.DR_KNIGHT_MODIFICATION;
-import static helpers.Constants.DR_PYROMANCER_HP;
-import static helpers.Constants.DR_PYROMANCER_MODIFICATION;
-import static helpers.Constants.DR_ROGUE_HP;
-import static helpers.Constants.DR_ROGUE_MODIFICATION;
-import static helpers.Constants.DR_WIZARD_HP;
-import static helpers.Constants.DR_WIZARD_MODIFICATION;
 import static helpers.Constants.FIRST_ABILITY;
 import static helpers.Constants.GB_KNIGHT_HP;
 import static helpers.Constants.GB_KNIGHT_MODIFICATION;
@@ -46,8 +37,8 @@ public final class GoodBoy extends Angel {
         if (receiver.getHp() <= 0) {
             return;
         }
-        receiver.setSelfModifiers(FIRST_ABILITY,GB_KNIGHT_MODIFICATION);
-        receiver.setSelfModifiers(SECOND_ABILITY,GB_KNIGHT_MODIFICATION);
+        receiver.setSelfModifiers(FIRST_ABILITY, GB_KNIGHT_MODIFICATION);
+        receiver.setSelfModifiers(SECOND_ABILITY, GB_KNIGHT_MODIFICATION);
         receiver.receiveHP(GB_KNIGHT_HP);
     }
 
@@ -56,8 +47,8 @@ public final class GoodBoy extends Angel {
         if (receiver.getHp() <= 0) {
             return;
         }
-        receiver.setSelfModifiers(FIRST_ABILITY,GB_PYROMANCER_MODIFICATION);
-        receiver.setSelfModifiers(SECOND_ABILITY,GB_PYROMANCER_MODIFICATION);
+        receiver.setSelfModifiers(FIRST_ABILITY, GB_PYROMANCER_MODIFICATION);
+        receiver.setSelfModifiers(SECOND_ABILITY, GB_PYROMANCER_MODIFICATION);
         receiver.receiveHP(GB_PYROMANCER_HP);
     }
 
@@ -66,8 +57,8 @@ public final class GoodBoy extends Angel {
         if (receiver.getHp() <= 0) {
             return;
         }
-        receiver.setSelfModifiers(FIRST_ABILITY,GB_WIZARD_MODIFICATION);
-        receiver.setSelfModifiers(SECOND_ABILITY,GB_WIZARD_MODIFICATION);
+        receiver.setSelfModifiers(FIRST_ABILITY, GB_WIZARD_MODIFICATION);
+        receiver.setSelfModifiers(SECOND_ABILITY, GB_WIZARD_MODIFICATION);
         receiver.receiveHP(GB_WIZARD_HP);
     }
 
@@ -76,8 +67,8 @@ public final class GoodBoy extends Angel {
         if (receiver.getHp() <= 0) {
             return;
         }
-        receiver.setSelfModifiers(FIRST_ABILITY,GB_ROGUE_MODIFICATION);
-        receiver.setSelfModifiers(SECOND_ABILITY,GB_ROGUE_MODIFICATION);
+        receiver.setSelfModifiers(FIRST_ABILITY, GB_ROGUE_MODIFICATION);
+        receiver.setSelfModifiers(SECOND_ABILITY, GB_ROGUE_MODIFICATION);
         receiver.receiveHP(GB_ROGUE_HP);
     }
 

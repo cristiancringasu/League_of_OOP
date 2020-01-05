@@ -7,7 +7,7 @@ import fileio.implementations.FileWriter;
 import java.util.Observable;
 import java.util.Observer;
 
-public class GreatMagician implements Observer {
+public final class GreatMagician implements Observer {
     private static GreatMagician instance = null;
     private FileWriter fw;
 
@@ -22,12 +22,12 @@ public class GreatMagician implements Observer {
         return instance;
     }
 
-    public void setFw(FileWriter fw) {
+    public void setFw(final FileWriter fw) {
         this.fw = fw;
     }
 
     @Override
-    public void update(Observable observable, Object o) {
+    public void update(final Observable observable, final Object o) {
         try {
             if (observable instanceof Player) {
                 Player invoker = (Player) observable;

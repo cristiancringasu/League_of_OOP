@@ -11,11 +11,6 @@ import assets.angelsAssets_.implementedAngels.Spawner;
 import assets.angelsAssets_.implementedAngels.TheDoomer;
 import assets.angelsAssets_.implementedAngels.XPAngel;
 import assets.observerAssets_.GreatMagician;
-import assets.playerAssets_.Player;
-import assets.playerAssets_.implementedPlayers.Knight;
-import assets.playerAssets_.implementedPlayers.Pyromancer;
-import assets.playerAssets_.implementedPlayers.Rogue;
-import assets.playerAssets_.implementedPlayers.Wizard;
 import helpers.IntegerTulep;
 
 
@@ -38,34 +33,34 @@ public final class AngelsFactory {
         Angel newAngel = null;
         switch (a) {
             case "DamageAngel":
-                newAngel = new DamageAngel(position,round);
+                newAngel = new DamageAngel(position, round);
                 break;
             case "DarkAngel":
-                newAngel = new DarkAngel(position,round);
+                newAngel = new DarkAngel(position, round);
                 break;
             case "Dracula":
-                newAngel = new Dracula(position,round);
+                newAngel = new Dracula(position, round);
                 break;
             case "GoodBoy":
-                newAngel = new GoodBoy(position,round);
+                newAngel = new GoodBoy(position, round);
                 break;
             case "LevelUpAngel":
-                newAngel = new LevelUpAngel(position,round);
+                newAngel = new LevelUpAngel(position, round);
                 break;
             case "LifeGiver":
-                newAngel = new LifeGiver(position,round);
+                newAngel = new LifeGiver(position, round);
                 break;
             case "SmallAngel":
-                newAngel = new SmallAngel(position,round);
+                newAngel = new SmallAngel(position, round);
                 break;
             case "Spawner":
-                newAngel = new Spawner(position,round);
+                newAngel = new Spawner(position, round);
                 break;
             case "TheDoomer":
-                newAngel = new TheDoomer(position,round);
+                newAngel = new TheDoomer(position, round);
                 break;
             case "XPAngel":
-                newAngel = new XPAngel(position,round);
+                newAngel = new XPAngel(position, round);
                 break;
             default : break;
         }

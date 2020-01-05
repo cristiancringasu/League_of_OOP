@@ -6,17 +6,10 @@ import assets.playerAssets_.implementedPlayers.Pyromancer;
 import assets.playerAssets_.implementedPlayers.Rogue;
 import assets.playerAssets_.implementedPlayers.Wizard;
 import helpers.IntegerTulep;
-
-import static helpers.Constants.DA_KNIGHT_MODIFICATION;
-import static helpers.Constants.DA_PYROMANCER_MODIFICATION;
-import static helpers.Constants.DA_ROGUE_MODIFICATION;
-import static helpers.Constants.DA_WIZARD_MODIFICATION;
 import static helpers.Constants.DK_KNIGHT_HP;
 import static helpers.Constants.DK_PYROMANCER_HP;
 import static helpers.Constants.DK_ROGUE_HP;
 import static helpers.Constants.DK_WIZARD_HP;
-import static helpers.Constants.FIRST_ABILITY;
-import static helpers.Constants.SECOND_ABILITY;
 
 public final class DarkAngel extends Angel {
     public DarkAngel(final IntegerTulep position, final int triggerRound) {
@@ -39,8 +32,9 @@ public final class DarkAngel extends Angel {
             return;
         }
         receiver.receiveDamage(DK_KNIGHT_HP);
-        if (receiver.getHp() <= 0)
+        if (receiver.getHp() <= 0) {
             this.majorPlayerInterraction(receiver);
+        }
     }
 
     @Override
@@ -49,8 +43,9 @@ public final class DarkAngel extends Angel {
             return;
         }
         receiver.receiveDamage(DK_PYROMANCER_HP);
-        if (receiver.getHp() <= 0)
+        if (receiver.getHp() <= 0) {
             this.majorPlayerInterraction(receiver);
+        }
     }
 
     @Override
@@ -59,8 +54,9 @@ public final class DarkAngel extends Angel {
             return;
         }
         receiver.receiveDamage(DK_WIZARD_HP);
-        if (receiver.getHp() <= 0)
+        if (receiver.getHp() <= 0) {
             this.majorPlayerInterraction(receiver);
+        }
     }
 
     @Override
@@ -69,8 +65,9 @@ public final class DarkAngel extends Angel {
             return;
         }
         receiver.receiveDamage(DK_ROGUE_HP);
-        if (receiver.getHp() <= 0)
+        if (receiver.getHp() <= 0) {
             this.majorPlayerInterraction(receiver);
+        }
     }
 
 

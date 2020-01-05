@@ -8,8 +8,6 @@ import assets.mapAssets_.GameMap;
 import assets.playerAssets_.Player;
 import assets.playerAssets_.PlayerType;
 import assets.strategiesAssets_.DoNothingStrategy;
-import assets.strategiesAssets_.implementedStrategies.pyromancerStrategies.PyromancerDeffensiveStrategy;
-import assets.strategiesAssets_.implementedStrategies.pyromancerStrategies.PyromancerOffensiveStrategy;
 import assets.strategiesAssets_.implementedStrategies.rogueStrategies.RogueDeffensiveStrategy;
 import assets.strategiesAssets_.implementedStrategies.rogueStrategies.RogueOffensiveStrategy;
 import helpers.IntegerTulep;
@@ -20,6 +18,8 @@ import static helpers.Constants.ROGUE_HP;
 import static helpers.Constants.ROGUE_INITIAL_HP;
 import static helpers.Constants.ROGUE_LEVELING_HP;
 import static helpers.Constants.STAB_MAGIC;
+import static helpers.Constants.ST_HIGH_BOUND_ROGUE_HP_PER;
+import static helpers.Constants.ST_LOW_BOUND_ROGUE_HP_PER;
 
 public final class Rogue extends Player {
 
@@ -37,7 +37,7 @@ public final class Rogue extends Player {
     }
 
     @Override
-    public void acceptAngel(Angel angel)  {
+    public void acceptAngel(final Angel angel)  {
         DispatchPlayerSelector.selectApply(this, angel);
         //Pseudo-DoubleDispatch
     }
@@ -46,11 +46,12 @@ public final class Rogue extends Player {
     public void selectStrategy() {
         int currentHP = getHp();
         int maxHP = getMaxHP();
-        if (currentHP > maxHP/7 && currentHP < maxHP/5) {
+        if (currentHP > maxHP / ST_LOW_BOUND_ROGUE_HP_PER
+                && currentHP < maxHP / ST_HIGH_BOUND_ROGUE_HP_PER) {
             setStrategy(new RogueOffensiveStrategy());
             return;
         }
-        if (currentHP < maxHP/7 && currentHP > 0) {
+        if (currentHP < maxHP / ST_LOW_BOUND_ROGUE_HP_PER && currentHP > 0) {
             setStrategy(new RogueDeffensiveStrategy());
             return;
         }

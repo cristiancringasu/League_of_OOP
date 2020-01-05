@@ -55,7 +55,7 @@ public final class Slam implements Ability, SecondaryEffects {
         }
     }
 
-    public void applySecondaryEffects(final Player receiver, final int initialDamage) {
+    public void applySecondaryEffects(final Player receiver, final int overtimeDamage) {
         return;
     }
 

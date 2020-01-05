@@ -3,16 +3,12 @@ package engine;
 import assets.abilityAssets_.PerpetualEffects;
 import assets.abilityAssets_.SEffectType;
 import assets.angelsAssets_.Angel;
-import assets.mapAssets_.GameMap;
 import assets.playerAssets_.Player;
 import assets.playerAssets_.PlayerType;
 import assets.strategiesAssets_.DoNothingStrategy;
 import fileio.implementations.FileWriter;
 import helpers.IntegerTulep;
 import main.GameInput;
-
-import javax.swing.text.Position;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,6 +27,10 @@ public final class Round {
             instance = new Round();
         }
         return instance;
+    }
+
+    public int getRoundCounter() {
+        return roundCounter;
     }
 
     public void makeMove(final Player player, final Character m) {
@@ -72,7 +72,7 @@ public final class Round {
         }
     }
 
-    public List<Player> findPlayersAtPos(List<Player> players, IntegerTulep position) {
+    public List<Player> findPlayersAtPos(final List<Player> players, final IntegerTulep position) {
         List<Player> foundPlayers = new LinkedList<>();
         for (int index =  0; index < players.size(); index++) {
             Player currentPlayer = players.get(index);
@@ -105,7 +105,8 @@ public final class Round {
                 Player currentPlayer = gameInput.getPlayers().get(index);
                 if (overtimeEffects.containsKey(currentPlayer)) {
                     PerpetualEffects effect = overtimeEffects.get(currentPlayer);
-                    if (overtimeEffects.get(currentPlayer).getEffectType() != SEffectType.Paralysis) {
+                    if (overtimeEffects.get(currentPlayer)
+                            .getEffectType() != SEffectType.Paralysis) {
                         effect.applyEffects();
                         currentPlayer.selectStrategy();
                     } else {
@@ -158,7 +159,8 @@ public final class Round {
                 IntegerTulep angelPosition = currentAngel.getPosition();
                 List<Player> foundPlayers = findPlayersAtPos(gameInput.getPlayers(), angelPosition);
                 if (foundPlayers.size() > 0) {
-                    for (int fplayersIndex = 0; fplayersIndex < foundPlayers.size(); fplayersIndex++) {
+                    for (int fplayersIndex = 0; fplayersIndex < foundPlayers.size();
+                         fplayersIndex++) {
                         Player receiver = foundPlayers.get(fplayersIndex);
                         receiver.acceptAngelMain(currentAngel);
                     }

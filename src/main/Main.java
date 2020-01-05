@@ -26,12 +26,24 @@ public final class Main {
         /**
          * homework logic
          */
-        int a = 0;
-
+        //4 7
         int rounds = gameInput.getRounds();
         while (rounds > 0) {
+            /*
+            int r = Round.getInstance().getRoundCounter();
+            System.out.println("_____________ Round " + r +" _____________");
+            System.out.println("Before:");
+            Debuger.getInstance().printPlayers(gameInput);
+
+             */
             Round.getInstance().play(gameInput, fw);
+            /*
+            System.out.println("\nAfter:");
+            Debuger.getInstance().printPlayers(gameInput);
+            System.out.println("-----------END ROUND--------");
             //Debuger.getInstance().printPlayers(gameInput);
+
+             */
             rounds--;
         }
         //Debuger.getInstance().printPlayers(gameInput);

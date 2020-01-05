@@ -8,7 +8,7 @@ import static helpers.Constants.SECOND_ABILITY;
 import static helpers.Constants.ST_D_KNIGHT_MODIFICATION;
 import static helpers.Constants.ST_D_KNIGHT_HP_PER;
 
-public class KnightDeffensiveStrategy implements PlayerStrategy {
+public final class KnightDeffensiveStrategy implements PlayerStrategy {
     @Override
     public void applyStrategy(final Player invoker) {
         int currentHP = invoker.getHp();

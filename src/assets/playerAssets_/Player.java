@@ -1,16 +1,12 @@
 package assets.playerAssets_;
 
-import assets.abilityAssets_.Modifiers;
 import assets.abilityAssets_.PerpetualEffects;
 import assets.angelsAssets_.Angel;
-import assets.angelsAssets_.DispatchPlayerSelector;
 import assets.angelsAssets_.implementedAngels.Spawner;
 import assets.mapAssets_.GameMap;
 import assets.strategiesAssets_.DoNothingStrategy;
 import assets.strategiesAssets_.PlayerStrategy;
 import helpers.IntegerTulep;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -44,7 +40,7 @@ public abstract class Player extends Observable {
         this.initialHP = initialHP;
         this.levelingHP = levelingHP;
         this.position = position;
-        this.selfModifiers = new ArrayList<>(Arrays.asList(0.0f,0.0f));
+        this.selfModifiers = new ArrayList<>(Arrays.asList(0.0f, 0.0f));
         this.strategy = new DoNothingStrategy();
     }
 
@@ -94,6 +90,9 @@ public abstract class Player extends Observable {
         this.level = level;
     }
 
+    /**
+     * Method that update level.
+     */
     private void updateLevel() {
         int notIncrementedLevel = ((xp - BASE_XP) / LEVEL_UP_XP);
         if (notIncrementedLevel < 0 || xp < BASE_XP) { //Haven't reached 250XP -> lvl.1
@@ -109,6 +108,9 @@ public abstract class Player extends Observable {
         }
     }
 
+    /**
+     * Method that increment level.
+     */
     public void forcedLevelUp() {
         xp = BASE_XP + LEVEL_UP_XP * level;
         level += 1;
@@ -133,6 +135,10 @@ public abstract class Player extends Observable {
         this.xp = xp;
     }
 
+    /**
+     * Method that receive XP.
+     * @param newXp = received XP
+     */
     public void receiveXP(final int newXp) {
         this.xp += newXp;
         updateLevel();
@@ -172,10 +178,10 @@ public abstract class Player extends Observable {
 
     /**
      * Method that recover hp from HP.
-     * @param hp = +hp
+     * @param receivedHP = +hp
      */
-    public void receiveHP(final int hp) {
-        this.hp += hp;
+    public void receiveHP(final int receivedHP) {
+        this.hp += receivedHP;
         if (this.hp > getMaxHP()) {
             this.hp = getMaxHP();
         }
@@ -222,12 +228,13 @@ public abstract class Player extends Observable {
     public void haveKilledOpponent(final Player opponent) {
         setChanged();
         notifyObservers(opponent);
-        if (this.hp > 0)
+        if (this.hp > 0) {
             receiveXPFromKilling(opponent);
+        }
     }
 
     /**
-     * getter for modifiers
+     * Getter for modifiers.
      * @return modifiers
      */
     public ArrayList<Float> getSelfModifiers() {
@@ -235,7 +242,7 @@ public abstract class Player extends Observable {
     }
 
     /**
-     * getter for modifiers dor ability
+     * Getter for modifiers dor ability.
      * @return modifiers for ability
      */
     public Float getSelfModifiers(final int index) {
@@ -243,17 +250,17 @@ public abstract class Player extends Observable {
     }
 
     /**
-     * setter for modifiers
+     * Setter for modifiers.
      * used by angels and in players strategies
      */
     public void setSelfModifiers(final int index, final Float modification) {
         Float oldModifier = this.selfModifiers.get(index);
         Float newModifier = oldModifier + modification;
-        this.selfModifiers.set(index,newModifier);
+        this.selfModifiers.set(index, newModifier);
     }
 
     /**
-     * double dispatch: angel visits the player and notify Observers
+     * Double dispatch: angel visits the player and notify Observers.
      */
     public void acceptAngelMain(final Angel angel) {
         if (this.getHp() > 0 ^ angel instanceof Spawner) {
@@ -264,9 +271,9 @@ public abstract class Player extends Observable {
     }
 
     /**
-     * double dispatch: angel visits the player
+     * Double dispatch: angel visits the player.
      */
-    public abstract void acceptAngel(final Angel angel);
+    public abstract void acceptAngel(Angel angel);
 
     /**
      * @return strategy
@@ -278,17 +285,17 @@ public abstract class Player extends Observable {
     /**
      * @param strategy sets the new strategy
      */
-    public void setStrategy(PlayerStrategy strategy) {
+    public void setStrategy(final PlayerStrategy strategy) {
         this.strategy = strategy;
     }
 
     /**
-     * dinamically selects strategy
+     * Dinamically selects strategy.
      */
     public abstract void selectStrategy();
 
     /**
-     * applies selected strategy
+     * Applies selected strategy.
      */
     public void playStrategy() {
         this.strategy.applyStrategy(this);

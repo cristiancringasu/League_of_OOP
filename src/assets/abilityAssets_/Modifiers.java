@@ -170,7 +170,7 @@ public final class Modifiers {
                                       final int abilityID) {
         Float baseMod = raceModifiers.get(sender.getType()).get(abilityID).get(receiver.getType());
         Float selfMod = 0.0f;
-        if(baseMod != 1.0f) {
+        if (baseMod != 1.0f) {
             selfMod = sender.getSelfModifiers(abilityID);
         }
         return baseMod + selfMod;

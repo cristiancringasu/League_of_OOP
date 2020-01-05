@@ -1,7 +1,6 @@
 package assets.angelsAssets_.implementedAngels;
 
 import assets.angelsAssets_.Angel;
-import assets.playerAssets_.Player;
 import assets.playerAssets_.implementedPlayers.Knight;
 import assets.playerAssets_.implementedPlayers.Pyromancer;
 import assets.playerAssets_.implementedPlayers.Rogue;
@@ -35,8 +34,8 @@ public final class DamageAngel extends Angel {
         if (receiver.getHp() <= 0) {
             return;
         }
-        receiver.setSelfModifiers(FIRST_ABILITY,DA_KNIGHT_MODIFICATION);
-        receiver.setSelfModifiers(SECOND_ABILITY,DA_KNIGHT_MODIFICATION);
+        receiver.setSelfModifiers(FIRST_ABILITY, DA_KNIGHT_MODIFICATION);
+        receiver.setSelfModifiers(SECOND_ABILITY, DA_KNIGHT_MODIFICATION);
     }
 
     @Override
@@ -44,8 +43,8 @@ public final class DamageAngel extends Angel {
         if (receiver.getHp() <= 0) {
             return;
         }
-        receiver.setSelfModifiers(FIRST_ABILITY,DA_PYROMANCER_MODIFICATION);
-        receiver.setSelfModifiers(SECOND_ABILITY,DA_PYROMANCER_MODIFICATION);
+        receiver.setSelfModifiers(FIRST_ABILITY, DA_PYROMANCER_MODIFICATION);
+        receiver.setSelfModifiers(SECOND_ABILITY, DA_PYROMANCER_MODIFICATION);
     }
 
     @Override
@@ -53,8 +52,8 @@ public final class DamageAngel extends Angel {
         if (receiver.getHp() <= 0) {
             return;
         }
-        receiver.setSelfModifiers(FIRST_ABILITY,DA_WIZARD_MODIFICATION);
-        receiver.setSelfModifiers(SECOND_ABILITY,DA_WIZARD_MODIFICATION);
+        receiver.setSelfModifiers(FIRST_ABILITY, DA_WIZARD_MODIFICATION);
+        receiver.setSelfModifiers(SECOND_ABILITY, DA_WIZARD_MODIFICATION);
     }
 
     @Override
@@ -62,8 +61,8 @@ public final class DamageAngel extends Angel {
         if (receiver.getHp() <= 0) {
             return;
         }
-        receiver.setSelfModifiers(FIRST_ABILITY,DA_ROGUE_MODIFICATION);
-        receiver.setSelfModifiers(SECOND_ABILITY,DA_ROGUE_MODIFICATION);
+        receiver.setSelfModifiers(FIRST_ABILITY, DA_ROGUE_MODIFICATION);
+        receiver.setSelfModifiers(SECOND_ABILITY, DA_ROGUE_MODIFICATION);
     }
 
 

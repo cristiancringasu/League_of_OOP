@@ -6,11 +6,6 @@ import assets.playerAssets_.implementedPlayers.Pyromancer;
 import assets.playerAssets_.implementedPlayers.Rogue;
 import assets.playerAssets_.implementedPlayers.Wizard;
 import helpers.IntegerTulep;
-
-import static helpers.Constants.DA_KNIGHT_MODIFICATION;
-import static helpers.Constants.DA_PYROMANCER_MODIFICATION;
-import static helpers.Constants.DA_ROGUE_MODIFICATION;
-import static helpers.Constants.DA_WIZARD_MODIFICATION;
 import static helpers.Constants.FIRST_ABILITY;
 import static helpers.Constants.LV_KNIGHT_MODIFICATION;
 import static helpers.Constants.LV_PYROMANCER_MODIFICATION;
@@ -38,8 +33,8 @@ public final class LevelUpAngel extends Angel {
         if (receiver.getHp() <= 0) {
             return;
         }
-        receiver.setSelfModifiers(FIRST_ABILITY,LV_KNIGHT_MODIFICATION);
-        receiver.setSelfModifiers(SECOND_ABILITY,LV_KNIGHT_MODIFICATION);
+        receiver.setSelfModifiers(FIRST_ABILITY, LV_KNIGHT_MODIFICATION);
+        receiver.setSelfModifiers(SECOND_ABILITY, LV_KNIGHT_MODIFICATION);
         receiver.forcedLevelUp();
     }
 
@@ -48,8 +43,8 @@ public final class LevelUpAngel extends Angel {
         if (receiver.getHp() <= 0) {
             return;
         }
-        receiver.setSelfModifiers(FIRST_ABILITY,LV_PYROMANCER_MODIFICATION);
-        receiver.setSelfModifiers(SECOND_ABILITY,LV_PYROMANCER_MODIFICATION);
+        receiver.setSelfModifiers(FIRST_ABILITY, LV_PYROMANCER_MODIFICATION);
+        receiver.setSelfModifiers(SECOND_ABILITY, LV_PYROMANCER_MODIFICATION);
         receiver.forcedLevelUp();
     }
 
@@ -58,8 +53,8 @@ public final class LevelUpAngel extends Angel {
         if (receiver.getHp() <= 0) {
             return;
         }
-        receiver.setSelfModifiers(FIRST_ABILITY,LV_WIZARD_MODIFICATION);
-        receiver.setSelfModifiers(SECOND_ABILITY,LV_WIZARD_MODIFICATION);
+        receiver.setSelfModifiers(FIRST_ABILITY, LV_WIZARD_MODIFICATION);
+        receiver.setSelfModifiers(SECOND_ABILITY, LV_WIZARD_MODIFICATION);
         receiver.forcedLevelUp();
     }
 
@@ -68,8 +63,8 @@ public final class LevelUpAngel extends Angel {
         if (receiver.getHp() <= 0) {
             return;
         }
-        receiver.setSelfModifiers(FIRST_ABILITY,LV_ROGUE_MODIFICATION);
-        receiver.setSelfModifiers(SECOND_ABILITY,LV_ROGUE_MODIFICATION);
+        receiver.setSelfModifiers(FIRST_ABILITY, LV_ROGUE_MODIFICATION);
+        receiver.setSelfModifiers(SECOND_ABILITY, LV_ROGUE_MODIFICATION);
         receiver.forcedLevelUp();
     }
 

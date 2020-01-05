@@ -6,11 +6,6 @@ import assets.playerAssets_.implementedPlayers.Pyromancer;
 import assets.playerAssets_.implementedPlayers.Rogue;
 import assets.playerAssets_.implementedPlayers.Wizard;
 import helpers.IntegerTulep;
-
-import static helpers.Constants.LG_KNIGHT_HP;
-import static helpers.Constants.LG_PYROMANCER_HP;
-import static helpers.Constants.LG_ROGUE_HP;
-import static helpers.Constants.LG_WIZARD_HP;
 import static helpers.Constants.XA_KNIGHT_XP;
 import static helpers.Constants.XA_PYROMANCER_XP;
 import static helpers.Constants.XA_ROGUE_XP;

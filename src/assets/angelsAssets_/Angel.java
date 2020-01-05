@@ -20,21 +20,35 @@ public abstract class Angel extends Observable {
         spawned = 0;
     }
 
+    /**
+     * Angel spawn, observers notified.
+     */
     public void setSpawned() {
         spawned = 1;
         setChanged();
         notifyObservers(1);
     }
 
-    public void majorPlayerInterraction(Player affected) {
+    /**
+     * Angel kill / revive, observers notified.
+     */
+    public void majorPlayerInterraction(final Player affected) {
         setChanged();
         notifyObservers(affected);
     }
 
+    /**
+     * Angel position is returned.
+     * @return angel pos
+     */
     public IntegerTulep getPosition() {
         return position;
     }
 
+    /**
+     * Not used.
+     * Return angel activation round.
+     */
     public int getTriggerRound() {
         return triggerRound;
     }
@@ -43,11 +57,11 @@ public abstract class Angel extends Observable {
 
     public abstract String getAction();
 
-    public abstract void applyKnight(final Knight receiver);
+    public abstract void applyKnight(Knight receiver);
 
-    public abstract void applyPyromancer(final Pyromancer receiver);
+    public abstract void applyPyromancer(Pyromancer receiver);
 
-    public abstract void applyWizard(final Wizard receiver);
+    public abstract void applyWizard(Wizard receiver);
 
-    public abstract void applyRogue(final Rogue receiver);
+    public abstract void applyRogue(Rogue receiver);
 }

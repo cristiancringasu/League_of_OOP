@@ -1,8 +1,6 @@
 package assets.abilityAssets_;
 
-import assets.mapAssets_.GameMap;
 import assets.playerAssets_.Player;
-import helpers.IntegerTulep;
 
 public final class PerpetualEffects {
     private Player receiver;

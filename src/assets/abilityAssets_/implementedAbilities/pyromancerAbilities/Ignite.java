@@ -64,8 +64,8 @@ public final class Ignite implements Ability, SecondaryEffects {
         }
     }
 
-    public void applySecondaryEffects(final Player receiver, final int initialDamage) {
-        receiver.receiveDamage(initialDamage);
+    public void applySecondaryEffects(final Player receiver, final int overtimeDamage) {
+        receiver.receiveDamage(overtimeDamage);
     }
 
     public static Ignite getInstance() {

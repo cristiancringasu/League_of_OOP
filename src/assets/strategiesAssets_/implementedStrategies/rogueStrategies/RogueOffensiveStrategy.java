@@ -5,12 +5,10 @@ import assets.strategiesAssets_.PlayerStrategy;
 
 import static helpers.Constants.FIRST_ABILITY;
 import static helpers.Constants.SECOND_ABILITY;
-import static helpers.Constants.ST_A_PYROMANCER_HP_PER;
-import static helpers.Constants.ST_A_PYROMANCER_MODIFICATION;
 import static helpers.Constants.ST_A_ROGUE_HP_PER;
 import static helpers.Constants.ST_A_ROGUE_MODIFICATION;
 
-public class RogueOffensiveStrategy implements PlayerStrategy {
+public final class RogueOffensiveStrategy implements PlayerStrategy {
     @Override
     public void applyStrategy(final Player invoker) {
         int currentHP = invoker.getHp();

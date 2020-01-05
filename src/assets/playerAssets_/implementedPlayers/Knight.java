@@ -17,6 +17,8 @@ import java.util.HashMap;
 import static helpers.Constants.KNIGHT_HP;
 import static helpers.Constants.KNIGHT_INITIAL_HP;
 import static helpers.Constants.KNIGHT_LEVELING_HP;
+import static helpers.Constants.ST_HIGH_BOUND_KNIGHT_HP_PER;
+import static helpers.Constants.ST_LOW_BOUND_KNIGHT_HP_PER;
 
 public final class Knight extends Player {
     public Knight(final IntegerTulep position) {
@@ -30,7 +32,7 @@ public final class Knight extends Player {
     }
 
     @Override
-    public void acceptAngel(Angel angel)  {
+    public void acceptAngel(final Angel angel)  {
         DispatchPlayerSelector.selectApply(this, angel);
         //Pseudo-DoubleDispatch
     }
@@ -39,11 +41,12 @@ public final class Knight extends Player {
     public void selectStrategy() {
         int currentHP = getHp();
         int maxHP = getMaxHP();
-        if (currentHP > maxHP/3 && currentHP < maxHP/2) {
+        if (currentHP > maxHP / ST_LOW_BOUND_KNIGHT_HP_PER
+                && currentHP < maxHP / ST_HIGH_BOUND_KNIGHT_HP_PER) {
             setStrategy(new KnightOffensiveStrategy());
             return;
         }
-        if (currentHP < maxHP/3 && currentHP > 0) {
+        if (currentHP < maxHP / ST_LOW_BOUND_KNIGHT_HP_PER && currentHP > 0) {
             setStrategy(new KnightDeffensiveStrategy());
             return;
         }

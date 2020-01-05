@@ -170,11 +170,17 @@ public final class Constants {
     public static final float  ST_D_KNIGHT_MODIFICATION = -0.2f;
     public static final int ST_D_KNIGHT_HP_PER = 4;
 
+    public static final int ST_LOW_BOUND_KNIGHT_HP_PER = 3;
+    public static final int ST_HIGH_BOUND_KNIGHT_HP_PER = 2;
+
     //PYROMANCER_STRATEGIES
     public static final float ST_A_PYROMANCER_MODIFICATION = 0.7f;
     public static final int ST_A_PYROMANCER_HP_PER = 4;
     public static final float  ST_D_PYROMANCER_MODIFICATION = -0.3f;
     public static final int ST_D_PYROMANCER_HP_PER = 3;
+
+    public static final int ST_LOW_BOUND_PYROMANCER_HP_PER = 4;
+    public static final int ST_HIGH_BOUND_PYROMANCER_HP_PER = 3;
 
     //ROGUE_STRATEGIES
     public static final float ST_A_ROGUE_MODIFICATION = 0.4f;
@@ -182,9 +188,15 @@ public final class Constants {
     public static final float  ST_D_ROGUE_MODIFICATION = -0.1f;
     public static final int ST_D_ROGUE_HP_PER = 2;
 
+    public static final int ST_LOW_BOUND_ROGUE_HP_PER = 7;
+    public static final int ST_HIGH_BOUND_ROGUE_HP_PER = 5;
+
     //WIZARD_STRATEGIES
     public static final float ST_A_WIZARD_MODIFICATION = 0.6f;
     public static final int ST_A_WIZARD_HP_PER = 10;
     public static final float  ST_D_WIZARD_MODIFICATION = -0.2f;
     public static final int ST_D_WIZARD_HP_PER = 5;
+
+    public static final int ST_LOW_BOUND_WIZARD_HP_PER = 4;
+    public static final int ST_HIGH_BOUND_WIZARD_HP_PER = 2;
 }

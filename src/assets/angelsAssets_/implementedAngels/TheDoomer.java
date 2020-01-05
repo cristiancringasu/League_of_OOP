@@ -6,12 +6,7 @@ import assets.playerAssets_.implementedPlayers.Pyromancer;
 import assets.playerAssets_.implementedPlayers.Rogue;
 import assets.playerAssets_.implementedPlayers.Wizard;
 import helpers.IntegerTulep;
-
 import static helpers.Constants.DOOMER_HP;
-import static helpers.Constants.SW_KNIGHT_HP;
-import static helpers.Constants.SW_PYROMANCER_HP;
-import static helpers.Constants.SW_ROGUE_HP;
-import static helpers.Constants.SW_WIZARD_HP;
 
 public final class TheDoomer extends Angel {
     public TheDoomer(final IntegerTulep position, final int triggerRound) {

@@ -5,12 +5,10 @@ import assets.strategiesAssets_.PlayerStrategy;
 
 import static helpers.Constants.FIRST_ABILITY;
 import static helpers.Constants.SECOND_ABILITY;
-import static helpers.Constants.ST_D_KNIGHT_HP_PER;
-import static helpers.Constants.ST_D_KNIGHT_MODIFICATION;
 import static helpers.Constants.ST_D_PYROMANCER_HP_PER;
 import static helpers.Constants.ST_D_PYROMANCER_MODIFICATION;
 
-public class PyromancerDeffensiveStrategy implements PlayerStrategy {
+public final class PyromancerDeffensiveStrategy implements PlayerStrategy {
     @Override
     public void applyStrategy(final Player invoker) {
         int currentHP = invoker.getHp();

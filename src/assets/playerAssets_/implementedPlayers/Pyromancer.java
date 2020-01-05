@@ -8,8 +8,6 @@ import assets.mapAssets_.GameMap;
 import assets.playerAssets_.Player;
 import assets.playerAssets_.PlayerType;
 import assets.strategiesAssets_.DoNothingStrategy;
-import assets.strategiesAssets_.implementedStrategies.knightStrategies.KnightDeffensiveStrategy;
-import assets.strategiesAssets_.implementedStrategies.knightStrategies.KnightOffensiveStrategy;
 import assets.strategiesAssets_.implementedStrategies.pyromancerStrategies.PyromancerDeffensiveStrategy;
 import assets.strategiesAssets_.implementedStrategies.pyromancerStrategies.PyromancerOffensiveStrategy;
 import helpers.IntegerTulep;
@@ -19,6 +17,8 @@ import java.util.HashMap;
 import static helpers.Constants.PYROMANCER_HP;
 import static helpers.Constants.PYROMANCER_INITIAL_HP;
 import static helpers.Constants.PYROMANCER_LEVELING_HP;
+import static helpers.Constants.ST_HIGH_BOUND_PYROMANCER_HP_PER;
+import static helpers.Constants.ST_LOW_BOUND_PYROMANCER_HP_PER;
 
 public final class Pyromancer extends Player {
     public Pyromancer(final IntegerTulep position) {
@@ -33,7 +33,7 @@ public final class Pyromancer extends Player {
     }
 
     @Override
-    public void acceptAngel(Angel angel)  {
+    public void acceptAngel(final Angel angel)  {
         DispatchPlayerSelector.selectApply(this, angel);
         //Pseudo-DoubleDispatch
     }
@@ -42,11 +42,12 @@ public final class Pyromancer extends Player {
     public void selectStrategy() {
         int currentHP = getHp();
         int maxHP = getMaxHP();
-        if (currentHP > maxHP/4 && currentHP < maxHP/3) {
+        if (currentHP > maxHP / ST_LOW_BOUND_PYROMANCER_HP_PER
+                && currentHP < maxHP / ST_HIGH_BOUND_PYROMANCER_HP_PER) {
             setStrategy(new PyromancerOffensiveStrategy());
             return;
         }
-        if (currentHP < maxHP/4 && currentHP > 0) {
+        if (currentHP < maxHP / ST_LOW_BOUND_PYROMANCER_HP_PER && currentHP > 0) {
             setStrategy(new PyromancerDeffensiveStrategy());
             return;
         }

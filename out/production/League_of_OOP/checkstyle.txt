@@ -1,4 +1,2 @@
 Starting audit...
-[ERROR] /Volumes/EU/Anul_2/POO/Tema2/League_of_OOP/src/assets/abilityAssets_/PerpetualEffects.java:40:12: More than 7 parameters (found 8). [ParameterNumber]
 Audit done.
-Checkstyle ends with 1 errors.

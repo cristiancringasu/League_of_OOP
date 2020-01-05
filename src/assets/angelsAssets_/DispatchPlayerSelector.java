@@ -6,6 +6,10 @@ import assets.playerAssets_.implementedPlayers.Rogue;
 import assets.playerAssets_.implementedPlayers.Wizard;
 
 public final class DispatchPlayerSelector {
+    private DispatchPlayerSelector() {
+
+    }
+
     public static void selectApply(final Knight receiver, final Angel angel) {
         angel.applyKnight(receiver);
     }
