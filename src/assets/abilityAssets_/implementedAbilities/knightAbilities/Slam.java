@@ -13,6 +13,8 @@ import helpers.IntegerTulep;
 
 import java.util.HashMap;
 
+import static helpers.Constants.ZERO;
+
 public final class Slam implements Ability, SecondaryEffects {
     private static Slam instance = null;
     private final int levelModifier = 40;
@@ -34,8 +36,8 @@ public final class Slam implements Ability, SecondaryEffects {
         receiver.receiveDamage(Math.toIntExact(damage));
 
         overtimeEffects.put(receiver,
-                new PerpetualEffects(transmitter, receiver,
-                gameMap, this, roundsToEndure, SEffectType.Paralysis));
+                new PerpetualEffects(receiver, ZERO, this,
+                        roundsToEndure, SEffectType.Paralysis));
 
 
 
@@ -53,10 +55,7 @@ public final class Slam implements Ability, SecondaryEffects {
         }
     }
 
-    public void applySecondaryEffects(final Player transmitter, final int initialLevel,
-                                      final Player receiver,
-                                      final GameMap gameMap, final IntegerTulep initialPosition) {
-        //Dummy
+    public void applySecondaryEffects(final Player receiver, final int initialDamage) {
         return;
     }
 

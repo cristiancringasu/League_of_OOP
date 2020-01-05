@@ -5,11 +5,8 @@ import assets.playerAssets_.Player;
 import helpers.IntegerTulep;
 
 public final class PerpetualEffects {
-    private Player transmitter;
-    private int initialLevel;
     private Player receiver;
-    private GameMap gameMap;
-    private IntegerTulep initialPosition;
+    private int damage;
     private SecondaryEffects perpetualEffect; //Per Round
     private int roundsToEndure;
     private int roundsEndured = 0;
@@ -23,44 +20,19 @@ public final class PerpetualEffects {
         }
     }
 
-    public PerpetualEffects(final Player transmitter, final int initialLevel, final Player receiver,
-                            final GameMap gameMap, final IntegerTulep initialPosition,
-                            final SecondaryEffects perpetualEffect, final int roundsToEndure) {
-        this.transmitter = transmitter;
-        this.initialLevel = initialLevel;
-        this.receiver = receiver;
-        this.gameMap = gameMap;
-        this.initialPosition = initialPosition;
-        this.perpetualEffect = perpetualEffect;
-        this.roundsToEndure = roundsToEndure;
-
-    }
-
-
-    public PerpetualEffects(final Player transmitter, //final int initialLevel,
-                            final Player receiver,
-                            final GameMap gameMap, //final IntegerTulep initialPosition,
+    public PerpetualEffects(final Player receiver, final int damage,
                             final SecondaryEffects perpetualEffect, final int roundsToEndure,
                             final SEffectType effectType) {
-        this.transmitter = transmitter;
-        //this.initialLevel = initialLevel;
-        this.initialLevel = transmitter.getLevel();
-        //Did this because of [ParameterNumber]
-        //checkstyle error
         this.receiver = receiver;
-        this.gameMap = gameMap;
-        //this.initialPosition = initialPosition;
-        this.initialPosition = transmitter.getPosition(); //Did this because of [ParameterNumber]
-        //checkstyle error
         this.perpetualEffect = perpetualEffect;
         this.roundsToEndure = roundsToEndure;
         this.effectType = effectType;
+        this.damage = damage;
     }
 
     public SEffectType applyEffects() {
         if (roundsEndured < roundsToEndure) {
-            perpetualEffect.applySecondaryEffects(transmitter, initialLevel,
-                                            receiver, gameMap, initialPosition);
+            perpetualEffect.applySecondaryEffects(receiver, damage);
             roundsEndured++;
             return effectType;
             //If ability applied, returns effect applied.

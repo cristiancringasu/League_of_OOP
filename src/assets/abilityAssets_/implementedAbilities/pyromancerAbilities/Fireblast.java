@@ -25,8 +25,12 @@ public final class Fireblast implements Ability {
                              final HashMap<Player, PerpetualEffects> overtimeEffects) {
 
         long levelDamage = initialDamage + levelModifier * transmitter.getLevel();
-        long damage = Math.round(levelDamage
-                * Modifiers.getInstance().getModifiers(transmitter, receiver, gameMap, 0));
+        //Got lazy to implement it for the other abilities.. :(
+        Float landMod = Modifiers.getInstance().getLandModifiers()
+                .get(transmitter.getType()).get(gameMap.getMapCell(position));
+        long damage = Math.round(Math.round(levelDamage
+                * landMod)
+                * Modifiers.getInstance().getRaceModWthSelfMod(transmitter, receiver, 0));
 
         receiver.receiveDamage(Math.toIntExact(damage));
 

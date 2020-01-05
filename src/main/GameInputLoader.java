@@ -64,7 +64,7 @@ public final class GameInputLoader {
                     String[] angelComponents = angelCondensed.split(",");
                     String angelName = angelComponents[0];
                     int x = Integer.parseInt(angelComponents[1]);
-                    int y = Integer.parseInt(angelComponents[1]);
+                    int y = Integer.parseInt(angelComponents[2]);
 
                     Angel newAngel = AngelsFactory.getInstance().newAngel(angelName,
                             new IntegerTulep(x, y), i);

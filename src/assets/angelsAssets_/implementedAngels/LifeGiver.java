@@ -22,6 +22,17 @@ public final class LifeGiver extends Angel {
     }
 
     @Override
+    public String getName() {
+        return "LifeGiver";
+    }
+
+    @Override
+    public String getAction() {
+        return " helped ";
+    }
+
+
+    @Override
     public void applyKnight(final Knight receiver) {
         if (receiver.getHp() <= 0) {
             return;

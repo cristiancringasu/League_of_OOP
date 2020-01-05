@@ -7,6 +7,7 @@ import assets.mapAssets_.GameMap;
 import assets.playerAssets_.Player;
 import assets.playerAssets_.PlayerType;
 import assets.strategiesAssets_.DoNothingStrategy;
+import fileio.implementations.FileWriter;
 import helpers.IntegerTulep;
 import main.GameInput;
 
@@ -83,77 +84,90 @@ public final class Round {
         return foundPlayers;
     }
 
-    public void play(final GameInput gameInput) {
-        for (int index =  0; index < gameInput.getPlayersNo(); index++) {
-            Player currentPlayer = gameInput.getPlayers().get(index);
-            Character move = gameInput.getMoves().get(roundCounter).charAt(index);
-            makeMove(currentPlayer, move);
-        }
-
-        List<Player> sEffects = new ArrayList<>(overtimeEffects.keySet());
-        for (int i = 0; i < sEffects.size(); i++) {
-            Player affectedPlayer = sEffects.get(i);
-            PerpetualEffects effect = overtimeEffects.get(affectedPlayer);
-            effect.applyEffects();
-        }
-
-        for (int index =  0; index < gameInput.getPlayersNo(); index++) {
-            Player currentPlayer = gameInput.getPlayers().get(index);
-            if (overtimeEffects.containsKey(currentPlayer)) {
-                if (overtimeEffects.get(currentPlayer).getEffectType() != SEffectType.Paralysis) {
-                    currentPlayer.selectStrategy();
-                } else {
-                    currentPlayer.setStrategy(new DoNothingStrategy());
-                    //Dead players choose automatically DoNothingStrategy.
-                }
+    public void play(final GameInput gameInput, final FileWriter fw) {
+        try {
+            int indexedRound = roundCounter + 1;
+            fw.writeWord("~~ Round " + indexedRound + " ~~\n");
+            for (int index = 0; index < gameInput.getPlayersNo(); index++) {
+                Player currentPlayer = gameInput.getPlayers().get(index);
+                Character move = gameInput.getMoves().get(roundCounter).charAt(index);
+                makeMove(currentPlayer, move);
             }
-        }
-
-        for (int indexI =  0; indexI < gameInput.getPlayersNo(); indexI++) {
-            for (int indexJ = indexI + 1; indexJ < gameInput.getPlayersNo(); indexJ++) {
-                if (indexI == indexJ) {
-                    continue;
-                }
-
-                Player playerI = gameInput.getPlayers().get(indexI);
-                Player playerJ = gameInput.getPlayers().get(indexJ);
-
-                int playerIHP = playerI.getHp();
-                int playerJHP = playerJ.getHp();
-
-                int fightAcceptance = playerIHP * playerJHP;
-
-                if (playerI.getPosition().equals(playerJ.getPosition()) && fightAcceptance > 0) {
-                    if (playerI.getType() == PlayerType.Wizard) {
-                        playerJ.fight(playerI, gameInput.getGameMap(), overtimeEffects);
-                        playerI.fight(playerJ, gameInput.getGameMap(), overtimeEffects);
+            /*
+            List<Player> sEffects = new ArrayList<>(overtimeEffects.keySet());
+            for (int i = 0; i < sEffects.size(); i++) {
+                Player affectedPlayer = sEffects.get(i);
+                PerpetualEffects effect = overtimeEffects.get(affectedPlayer);
+                effect.applyEffects();
+            }
+            */
+            for (int index = 0; index < gameInput.getPlayersNo(); index++) {
+                Player currentPlayer = gameInput.getPlayers().get(index);
+                if (overtimeEffects.containsKey(currentPlayer)) {
+                    PerpetualEffects effect = overtimeEffects.get(currentPlayer);
+                    if (overtimeEffects.get(currentPlayer).getEffectType() != SEffectType.Paralysis) {
+                        effect.applyEffects();
+                        currentPlayer.selectStrategy();
                     } else {
-                        playerI.fight(playerJ, gameInput.getGameMap(), overtimeEffects);
-                        playerJ.fight(playerI, gameInput.getGameMap(), overtimeEffects);
+                        effect.applyEffects();
+                        currentPlayer.setStrategy(new DoNothingStrategy());
+                        //Dead players choose automatically DoNothingStrategy.
                     }
-                    if (playerJ.getHp() <= 0 && playerI.getHp() >= 0) {
-                        playerI.haveKilledOpponent(playerJ);
+                } else {
+                    currentPlayer.selectStrategy();
+                }
+                currentPlayer.playStrategy();
+            }
+
+            for (int indexI = 0; indexI < gameInput.getPlayersNo(); indexI++) {
+                for (int indexJ = indexI + 1; indexJ < gameInput.getPlayersNo(); indexJ++) {
+                    if (indexI == indexJ) {
+                        continue;
                     }
 
-                    if (playerI.getHp() <= 0 && playerJ.getHp() >= 0) {
-                        playerJ.haveKilledOpponent(playerI);
+                    Player playerI = gameInput.getPlayers().get(indexI);
+                    Player playerJ = gameInput.getPlayers().get(indexJ);
+
+                    int playerIHP = playerI.getHp();
+                    int playerJHP = playerJ.getHp();
+
+                    boolean fightAcceptance = playerIHP > 0 && playerJHP > 0;
+
+                    if (playerI.getPosition().equals(playerJ.getPosition()) && fightAcceptance) {
+                        if (playerI.getType() == PlayerType.Wizard) {
+                            playerJ.fight(playerI, gameInput.getGameMap(), overtimeEffects);
+                            playerI.fight(playerJ, gameInput.getGameMap(), overtimeEffects);
+                        } else {
+                            playerI.fight(playerJ, gameInput.getGameMap(), overtimeEffects);
+                            playerJ.fight(playerI, gameInput.getGameMap(), overtimeEffects);
+                        }
+                        if (playerJ.getHp() <= 0) {
+                            playerI.haveKilledOpponent(playerJ);
+                        }
+
+                        if (playerI.getHp() <= 0) {
+                            playerJ.haveKilledOpponent(playerI);
+                        }
                     }
                 }
             }
-        }
 
-        for (int index =  0; index < gameInput.getAngels().get(roundCounter).size(); index++) {
-            Angel currentAngel = gameInput.getAngels().get(roundCounter).get(index);
-            IntegerTulep angelPosition = currentAngel.getPosition();
-            List<Player> foundPlayers = findPlayersAtPos(gameInput.getPlayers(), angelPosition);
-            if (foundPlayers.size() > 0) {
-                for (int fplayersIndex = 0; fplayersIndex < foundPlayers.size(); fplayersIndex++) {
-                    Player receiver = foundPlayers.get(fplayersIndex);
-                    receiver.acceptAngel(currentAngel);
+            for (int index = 0; index < gameInput.getAngels().get(roundCounter).size(); index++) {
+                Angel currentAngel = gameInput.getAngels().get(roundCounter).get(index);
+                currentAngel.setSpawned();
+                IntegerTulep angelPosition = currentAngel.getPosition();
+                List<Player> foundPlayers = findPlayersAtPos(gameInput.getPlayers(), angelPosition);
+                if (foundPlayers.size() > 0) {
+                    for (int fplayersIndex = 0; fplayersIndex < foundPlayers.size(); fplayersIndex++) {
+                        Player receiver = foundPlayers.get(fplayersIndex);
+                        receiver.acceptAngelMain(currentAngel);
+                    }
                 }
             }
+            fw.writeWord("\n");
+            roundCounter++;
+        } catch (Exception e1) {
+            e1.printStackTrace();
         }
-
-        roundCounter++;
     }
 }

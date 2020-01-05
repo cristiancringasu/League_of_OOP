@@ -52,4 +52,9 @@ public final class Pyromancer extends Player {
         }
         setStrategy(new DoNothingStrategy());
     }
+
+    @Override
+    public String getName() {
+        return "Pyromancer " + getID();
+    }
 }

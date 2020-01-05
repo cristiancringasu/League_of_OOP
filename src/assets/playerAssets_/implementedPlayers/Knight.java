@@ -49,4 +49,9 @@ public final class Knight extends Player {
         }
         setStrategy(new DoNothingStrategy());
     }
+
+    @Override
+    public String getName() {
+        return "Knight " + getID();
+    }
 }

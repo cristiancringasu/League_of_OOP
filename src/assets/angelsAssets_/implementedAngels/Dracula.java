@@ -32,6 +32,16 @@ public final class Dracula extends Angel {
     }
 
     @Override
+    public String getName() {
+        return "Dracula";
+    }
+
+    @Override
+    public String getAction() {
+        return " hit ";
+    }
+
+    @Override
     public void applyKnight(final Knight receiver) {
         if (receiver.getHp() <= 0) {
             return;
@@ -39,6 +49,8 @@ public final class Dracula extends Angel {
         receiver.setSelfModifiers(FIRST_ABILITY,DR_KNIGHT_MODIFICATION);
         receiver.setSelfModifiers(SECOND_ABILITY,DR_KNIGHT_MODIFICATION);
         receiver.receiveDamage(DR_KNIGHT_HP);
+        if (receiver.getHp() <= 0)
+            this.majorPlayerInterraction(receiver);
     }
 
     @Override
@@ -49,6 +61,8 @@ public final class Dracula extends Angel {
         receiver.setSelfModifiers(FIRST_ABILITY,DR_PYROMANCER_MODIFICATION);
         receiver.setSelfModifiers(SECOND_ABILITY,DR_PYROMANCER_MODIFICATION);
         receiver.receiveDamage(DR_PYROMANCER_HP);
+        if (receiver.getHp() <= 0)
+            this.majorPlayerInterraction(receiver);
     }
 
     @Override
@@ -59,6 +73,8 @@ public final class Dracula extends Angel {
         receiver.setSelfModifiers(FIRST_ABILITY,DR_WIZARD_MODIFICATION);
         receiver.setSelfModifiers(SECOND_ABILITY,DR_WIZARD_MODIFICATION);
         receiver.receiveDamage(DR_WIZARD_HP);
+        if (receiver.getHp() <= 0)
+            this.majorPlayerInterraction(receiver);
     }
 
     @Override
@@ -69,6 +85,8 @@ public final class Dracula extends Angel {
         receiver.setSelfModifiers(FIRST_ABILITY,DR_ROGUE_MODIFICATION);
         receiver.setSelfModifiers(SECOND_ABILITY,DR_ROGUE_MODIFICATION);
         receiver.receiveDamage(DR_ROGUE_HP);
+        if (receiver.getHp() <= 0)
+            this.majorPlayerInterraction(receiver);
     }
 
 

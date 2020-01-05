@@ -19,11 +19,22 @@ public final class TheDoomer extends Angel {
     }
 
     @Override
+    public String getName() {
+        return "TheDoomer";
+    }
+
+    @Override
+    public String getAction() {
+        return " hit ";
+    }
+
+    @Override
     public void applyKnight(final Knight receiver) {
         if (receiver.getHp() <= 0) {
             return;
         }
         receiver.setHp(DOOMER_HP);
+        majorPlayerInterraction(receiver);
     }
 
     @Override
@@ -32,6 +43,7 @@ public final class TheDoomer extends Angel {
             return;
         }
         receiver.setHp(DOOMER_HP);
+        majorPlayerInterraction(receiver);
     }
 
     @Override
@@ -40,6 +52,7 @@ public final class TheDoomer extends Angel {
             return;
         }
         receiver.setHp(DOOMER_HP);
+        majorPlayerInterraction(receiver);
     }
 
     @Override
@@ -48,6 +61,7 @@ public final class TheDoomer extends Angel {
             return;
         }
         receiver.setHp(DOOMER_HP);
+        majorPlayerInterraction(receiver);
     }
 
 

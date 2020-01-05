@@ -4,7 +4,7 @@ public final class Constants {
     // add/delete any constants you think you may use
     private Constants() {
     }
-    public static final int CONSTANT = 0;
+    public static final int ZERO = 0;
     public static final int NULL_INTEGER = -1;
 
     public static final int BASE_XP = 250;
@@ -31,7 +31,7 @@ public final class Constants {
     public static final int WIZARD_LEVELING_HP = 30;
 
     public static final int FIRST_ABILITY = 0;
-    public static final int SECOND_ABILITY = 0;
+    public static final int SECOND_ABILITY = 1;
 
     //LAND_MODIFIERS
     public static final float NO_BONUS_LAND = 1.0f;
@@ -91,10 +91,10 @@ public final class Constants {
 
     //__________________________ANGELS___________________________\\
     //DAMAGE_ANGEL
-    public static final float  DA_KNIGHT_MODIFICATION = -0.15f;
-    public static final float  DA_PYROMANCER_MODIFICATION = -0.20f;
-    public static final float  DA_ROGUE_MODIFICATION = -0.30f;
-    public static final float  DA_WIZARD_MODIFICATION = -0.40f;
+    public static final float  DA_KNIGHT_MODIFICATION = 0.15f;
+    public static final float  DA_PYROMANCER_MODIFICATION = 0.20f;
+    public static final float  DA_ROGUE_MODIFICATION = 0.30f;
+    public static final float  DA_WIZARD_MODIFICATION = 0.40f;
 
     //DARK_ANGEL
     public static final int  DK_KNIGHT_HP = 40;
@@ -103,14 +103,14 @@ public final class Constants {
     public static final int  DK_WIZARD_HP = 20;
 
     //DRACULA
-    public static final float  DR_KNIGHT_MODIFICATION = -0.15f;
-    public static final float  DR_PYROMANCER_MODIFICATION = -0.20f;
-    public static final float  DR_ROGUE_MODIFICATION = -0.30f;
+    public static final float  DR_KNIGHT_MODIFICATION = -0.20f;
+    public static final float  DR_PYROMANCER_MODIFICATION = -0.30f;
+    public static final float  DR_ROGUE_MODIFICATION = -0.10f;
     public static final float  DR_WIZARD_MODIFICATION = -0.40f;
 
-    public static final int  DR_KNIGHT_HP = 40;
-    public static final int  DR_PYROMANCER_HP = 30;
-    public static final int  DR_ROGUE_HP = 10;
+    public static final int  DR_KNIGHT_HP = 60;
+    public static final int  DR_PYROMANCER_HP = 40;
+    public static final int  DR_ROGUE_HP = 35;
     public static final int  DR_WIZARD_HP = 20;
 
     //GOOD_BOY
@@ -127,7 +127,8 @@ public final class Constants {
     //LEVEL_UP_ANGEL
     public static final float  LV_KNIGHT_MODIFICATION = 0.1f;
     public static final float  LV_PYROMANCER_MODIFICATION = 0.2f;
-    public static final float  LV_ROGUE_MODIFICATION = 0.15f;
+    //public static final float  LV_ROGUE_MODIFICATION = 0.15f;
+    public static final float  LV_ROGUE_MODIFICATION = 0.1499999f;
     public static final float  LV_WIZARD_MODIFICATION = 0.25f;
 
     //LIFE_GIVER
@@ -166,24 +167,24 @@ public final class Constants {
     //KNIGHT_STRATEGIES
     public static final float ST_A_KNIGHT_MODIFICATION = 0.5f;
     public static final int ST_A_KNIGHT_HP_PER = 5;
-    public static final float  ST_D_KNIGHT_MODIFICATION = 0.2f;
+    public static final float  ST_D_KNIGHT_MODIFICATION = -0.2f;
     public static final int ST_D_KNIGHT_HP_PER = 4;
 
     //PYROMANCER_STRATEGIES
     public static final float ST_A_PYROMANCER_MODIFICATION = 0.7f;
     public static final int ST_A_PYROMANCER_HP_PER = 4;
-    public static final float  ST_D_PYROMANCER_MODIFICATION = 0.3f;
+    public static final float  ST_D_PYROMANCER_MODIFICATION = -0.3f;
     public static final int ST_D_PYROMANCER_HP_PER = 3;
 
     //ROGUE_STRATEGIES
     public static final float ST_A_ROGUE_MODIFICATION = 0.4f;
     public static final int ST_A_ROGUE_HP_PER = 7;
-    public static final float  ST_D_ROGUE_MODIFICATION = 0.1f;
+    public static final float  ST_D_ROGUE_MODIFICATION = -0.1f;
     public static final int ST_D_ROGUE_HP_PER = 2;
 
     //WIZARD_STRATEGIES
     public static final float ST_A_WIZARD_MODIFICATION = 0.6f;
     public static final int ST_A_WIZARD_HP_PER = 10;
-    public static final float  ST_D_WIZARD_MODIFICATION = 0.2f;
+    public static final float  ST_D_WIZARD_MODIFICATION = -0.2f;
     public static final int ST_D_WIZARD_HP_PER = 5;
 }

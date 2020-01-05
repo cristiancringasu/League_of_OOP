@@ -64,6 +64,7 @@ public final class Score {
         }
     }
 
+    /*
     public void printFScore(final GameInput gameInput, final String outputPath) {
         try {
             FileWriter fw = new FileWriter(outputPath);
@@ -92,6 +93,44 @@ public final class Score {
                 stringBuilder.append('\n');
                 //if(index != gameInput.getPlayersNo() - 1)
                     //stringBuilder.append('\n');
+                fw.writeWord(stringBuilder.toString());
+            }
+            fw.writeWord("\n");
+            fw.close();
+        }   catch (Exception e1) {
+            e1.printStackTrace();
+        }
+    }
+
+     */
+
+    public void printFScore(final GameInput gameInput, final FileWriter fw) {
+        try {
+            fw.writeWord("~~ Results ~~\n");
+            for (int index = 0; index < gameInput.getPlayersNo(); index++) {
+                Player currentPlayer = gameInput.getPlayers().get(index);
+                StringBuilder stringBuilder = new StringBuilder();
+
+                stringBuilder.append(getPrintableType(currentPlayer));
+                stringBuilder.append(' ');
+                if (currentPlayer.getHp() <= 0) {
+                    stringBuilder.append("dead");
+                } else {
+                    stringBuilder.append(currentPlayer.getLevel());
+                    stringBuilder.append(' ');
+                    stringBuilder.append(currentPlayer.getXp());
+                    stringBuilder.append(' ');
+                    stringBuilder.append(currentPlayer.getHp());
+                    stringBuilder.append(' ');
+
+                    IntegerTulep position = currentPlayer.getPosition();
+                    stringBuilder.append(position.getFirst());
+                    stringBuilder.append(' ');
+                    stringBuilder.append(position.getSecond());
+                }
+                stringBuilder.append('\n');
+                //if(index != gameInput.getPlayersNo() - 1)
+                //stringBuilder.append('\n');
                 fw.writeWord(stringBuilder.toString());
             }
             fw.writeWord("\n");

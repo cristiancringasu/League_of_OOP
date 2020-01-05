@@ -56,4 +56,9 @@ public final class Rogue extends Player {
         }
         setStrategy(new DoNothingStrategy());
     }
+
+    @Override
+    public String getName() {
+        return "Rogue " + getID();
+    }
 }

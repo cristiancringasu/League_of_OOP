@@ -64,4 +64,9 @@ public final class Wizard extends Player {
         }
         setStrategy(new DoNothingStrategy());
     }
+
+    @Override
+    public String getName() {
+        return "Wizard " + getID();
+    }
 }

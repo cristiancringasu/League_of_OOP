@@ -5,6 +5,5 @@ import assets.playerAssets_.Player;
 import helpers.IntegerTulep;
 
 public interface SecondaryEffects {
-    void applySecondaryEffects(Player transmitter, int initialLevel, Player receiver,
-                               GameMap gameMap, IntegerTulep initialPosition);
+    void applySecondaryEffects(Player receiver, int initialDamage);
 }

@@ -10,6 +10,7 @@ import assets.angelsAssets_.implementedAngels.SmallAngel;
 import assets.angelsAssets_.implementedAngels.Spawner;
 import assets.angelsAssets_.implementedAngels.TheDoomer;
 import assets.angelsAssets_.implementedAngels.XPAngel;
+import assets.observerAssets_.GreatMagician;
 import assets.playerAssets_.Player;
 import assets.playerAssets_.implementedPlayers.Knight;
 import assets.playerAssets_.implementedPlayers.Pyromancer;
@@ -34,29 +35,43 @@ public final class AngelsFactory {
     }
 
     public Angel newAngel(final String a, final IntegerTulep position, final int round) {
+        Angel newAngel = null;
         switch (a) {
             case "DamageAngel":
-                return new DamageAngel(position,round);
+                newAngel = new DamageAngel(position,round);
+                break;
             case "DarkAngel":
-                return new DarkAngel(position,round);
+                newAngel = new DarkAngel(position,round);
+                break;
             case "Dracula":
-                return new Dracula(position,round);
+                newAngel = new Dracula(position,round);
+                break;
             case "GoodBoy":
-                return new GoodBoy(position,round);
+                newAngel = new GoodBoy(position,round);
+                break;
             case "LevelUpAngel":
-                return new LevelUpAngel(position,round);
+                newAngel = new LevelUpAngel(position,round);
+                break;
             case "LifeGiver":
-                return new LifeGiver(position,round);
+                newAngel = new LifeGiver(position,round);
+                break;
             case "SmallAngel":
-                return new SmallAngel(position,round);
+                newAngel = new SmallAngel(position,round);
+                break;
             case "Spawner":
-                return new Spawner(position,round);
+                newAngel = new Spawner(position,round);
+                break;
             case "TheDoomer":
-                return new TheDoomer(position,round);
+                newAngel = new TheDoomer(position,round);
+                break;
             case "XPAngel":
-                return new XPAngel(position,round);
+                newAngel = new XPAngel(position,round);
+                break;
             default : break;
         }
-        return null;
+        if (newAngel != null) {
+            newAngel.addObserver(GreatMagician.getInstance());
+        }
+        return newAngel;
     }
 }

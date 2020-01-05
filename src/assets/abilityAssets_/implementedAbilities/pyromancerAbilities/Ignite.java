@@ -18,7 +18,7 @@ public final class Ignite implements Ability, SecondaryEffects {
     private final int levelModifier = 20;
     private final int initialDamage = 150;
     private final int subroundDamage = 50;
-    private final int subroundLModifier = 50;
+    private final int subroundLModifier = 30;
     private final int roundsToEndure = 2;
 
     private Ignite() {
@@ -30,14 +30,23 @@ public final class Ignite implements Ability, SecondaryEffects {
                              final HashMap<Player, PerpetualEffects> overtimeEffects) {
 
         long levelDamage = initialDamage + levelModifier * transmitter.getLevel();
-        long damage = Math.round(levelDamage
-                * Modifiers.getInstance().getModifiers(transmitter, receiver, gameMap, 1));
+        //Got lazy to implement it for the other abilities.. :(
+        Float landMod = Modifiers.getInstance().getLandModifiers()
+                .get(transmitter.getType()).get(gameMap.getMapCell(position));
+        long damage = Math.round(Math.round(levelDamage
+                * landMod)
+                * Modifiers.getInstance().getRaceModWthSelfMod(transmitter, receiver, 1));
 
         receiver.receiveDamage(Math.toIntExact(damage));
 
+        long subLevelDamage = subroundDamage + subroundLModifier * transmitter.getLevel();
+        long subDamage = Math.round(Math.round(subLevelDamage
+                * landMod)
+                * Modifiers.getInstance().getRaceModWthSelfMod(transmitter, receiver, 1));
+
         overtimeEffects.put(receiver,
-                new PerpetualEffects(transmitter, receiver,
-                gameMap, this, roundsToEndure, SEffectType.Damage));
+                new PerpetualEffects(receiver, Math.toIntExact(subDamage), this,
+                        roundsToEndure, SEffectType.Damage));
 
 
 
@@ -55,16 +64,8 @@ public final class Ignite implements Ability, SecondaryEffects {
         }
     }
 
-    public void applySecondaryEffects(final Player transmitter, final int initialLevel,
-                                      final Player receiver,
-                                      final GameMap gameMap, final IntegerTulep initialPosition) {
-
-        long levelDamage = subroundDamage + subroundLModifier * initialLevel;
-        long damage = Math.round(levelDamage
-                * Modifiers.getInstance().
-                getModifiersWPOS(transmitter, receiver, gameMap, initialPosition, 1));
-
-        receiver.receiveDamage(Math.toIntExact(damage));
+    public void applySecondaryEffects(final Player receiver, final int initialDamage) {
+        receiver.receiveDamage(initialDamage);
     }
 
     public static Ignite getInstance() {

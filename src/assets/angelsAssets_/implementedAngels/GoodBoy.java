@@ -32,6 +32,16 @@ public final class GoodBoy extends Angel {
     }
 
     @Override
+    public String getName() {
+        return "GoodBoy";
+    }
+
+    @Override
+    public String getAction() {
+        return " helped ";
+    }
+
+    @Override
     public void applyKnight(final Knight receiver) {
         if (receiver.getHp() <= 0) {
             return;

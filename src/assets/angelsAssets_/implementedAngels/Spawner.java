@@ -22,11 +22,22 @@ public final class Spawner extends Angel {
     }
 
     @Override
+    public String getName() {
+        return "Spawner";
+    }
+
+    @Override
+    public String getAction() {
+        return " helped ";
+    }
+
+    @Override
     public void applyKnight(final Knight receiver) {
         if (receiver.getHp() > 0) {
             return;
         }
         receiver.setHp(SW_KNIGHT_HP);
+        majorPlayerInterraction(receiver);
     }
 
     @Override
@@ -35,6 +46,7 @@ public final class Spawner extends Angel {
             return;
         }
         receiver.setHp(SW_PYROMANCER_HP);
+        majorPlayerInterraction(receiver);
     }
 
     @Override
@@ -43,6 +55,7 @@ public final class Spawner extends Angel {
             return;
         }
         receiver.setHp(SW_WIZARD_HP);
+        majorPlayerInterraction(receiver);
     }
 
     @Override
@@ -51,6 +64,7 @@ public final class Spawner extends Angel {
             return;
         }
         receiver.setHp(SW_ROGUE_HP);
+        majorPlayerInterraction(receiver);
     }
 
 

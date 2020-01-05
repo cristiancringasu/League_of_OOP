@@ -24,11 +24,23 @@ public final class DarkAngel extends Angel {
     }
 
     @Override
+    public String getName() {
+        return "DarkAngel";
+    }
+
+    @Override
+    public String getAction() {
+        return " hit ";
+    }
+
+    @Override
     public void applyKnight(final Knight receiver) {
         if (receiver.getHp() <= 0) {
             return;
         }
         receiver.receiveDamage(DK_KNIGHT_HP);
+        if (receiver.getHp() <= 0)
+            this.majorPlayerInterraction(receiver);
     }
 
     @Override
@@ -37,6 +49,8 @@ public final class DarkAngel extends Angel {
             return;
         }
         receiver.receiveDamage(DK_PYROMANCER_HP);
+        if (receiver.getHp() <= 0)
+            this.majorPlayerInterraction(receiver);
     }
 
     @Override
@@ -45,6 +59,8 @@ public final class DarkAngel extends Angel {
             return;
         }
         receiver.receiveDamage(DK_WIZARD_HP);
+        if (receiver.getHp() <= 0)
+            this.majorPlayerInterraction(receiver);
     }
 
     @Override
@@ -53,6 +69,8 @@ public final class DarkAngel extends Angel {
             return;
         }
         receiver.receiveDamage(DK_ROGUE_HP);
+        if (receiver.getHp() <= 0)
+            this.majorPlayerInterraction(receiver);
     }
 
 

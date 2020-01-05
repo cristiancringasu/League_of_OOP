@@ -1,5 +1,6 @@
 package assets.playerAssets_;
 
+import assets.observerAssets_.GreatMagician;
 import assets.playerAssets_.implementedPlayers.Knight;
 import assets.playerAssets_.implementedPlayers.Pyromancer;
 import assets.playerAssets_.implementedPlayers.Rogue;
@@ -52,17 +53,25 @@ public final class PlayerFactory {
      */
 
     public Player newPlayer(final Character p, final IntegerTulep position) {
+        Player newPlayer = null;
         switch (p) {
             case 'W':
-                return new Wizard(position);
+                newPlayer = new Wizard(position);
+                break;
             case 'R':
-                return new Rogue(position);
+                newPlayer = new Rogue(position);
+                break;
             case 'P':
-                return new Pyromancer(position);
+                newPlayer = new Pyromancer(position);
+                break;
             case 'K':
-                return new Knight(position);
+                newPlayer = new Knight(position);
+                break;
             default : break;
         }
-        return null;
+        if (newPlayer != null) {
+            newPlayer.addObserver(GreatMagician.getInstance());
+        }
+        return newPlayer;
     }
 }

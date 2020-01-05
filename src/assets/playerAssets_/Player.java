@@ -4,7 +4,9 @@ import assets.abilityAssets_.Modifiers;
 import assets.abilityAssets_.PerpetualEffects;
 import assets.angelsAssets_.Angel;
 import assets.angelsAssets_.DispatchPlayerSelector;
+import assets.angelsAssets_.implementedAngels.Spawner;
 import assets.mapAssets_.GameMap;
+import assets.strategiesAssets_.DoNothingStrategy;
 import assets.strategiesAssets_.PlayerStrategy;
 import helpers.IntegerTulep;
 
@@ -12,6 +14,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Observable;
 
 import static helpers.Constants.BASE_XP;
 import static helpers.Constants.LEVEL_UP_XP;
@@ -19,7 +22,9 @@ import static helpers.Constants.MULTIPLIER_XP_KILL;
 import static helpers.Constants.STEP_XP_KILL;
 import static java.lang.Integer.max;
 
-public abstract class Player {
+public abstract class Player extends Observable {
+    private static int orderCreated = 0;
+    private int id;
     private PlayerType type;
     private int level = 0;
     private int xp = 0;
@@ -32,12 +37,29 @@ public abstract class Player {
 
     public Player(final PlayerType type, final int hp, final int initialHP, final int levelingHP,
                   final IntegerTulep position) {
+        this.id = orderCreated;
+        orderCreated++;
         this.type = type;
         this.hp = hp;
         this.initialHP = initialHP;
         this.levelingHP = levelingHP;
         this.position = position;
         this.selfModifiers = new ArrayList<>(Arrays.asList(0.0f,0.0f));
+        this.strategy = new DoNothingStrategy();
+    }
+
+    /**
+     * Method that returns player's name with id.
+     * @return name w/ id
+     */
+    public abstract String getName();
+
+    /**
+     * Method that returns player's id.
+     * @return id
+     */
+    public int getID() {
+        return id;
     }
 
     /**
@@ -74,13 +96,15 @@ public abstract class Player {
 
     private void updateLevel() {
         int notIncrementedLevel = ((xp - BASE_XP) / LEVEL_UP_XP);
-        if (notIncrementedLevel < 0) { //Haven't reached 250XP -> lvl.1
+        if (notIncrementedLevel < 0 || xp < BASE_XP) { //Haven't reached 250XP -> lvl.1
             this.level = 0;
         } else {
             int oldLevel = this.level;
             this.level = notIncrementedLevel + 1;
             if (oldLevel != this.level) {
                 recoverHP();
+                setChanged();
+                notifyObservers(oldLevel);
             }
         }
     }
@@ -88,6 +112,9 @@ public abstract class Player {
     public void forcedLevelUp() {
         xp = BASE_XP + LEVEL_UP_XP * level;
         level += 1;
+        recoverHP();
+        setChanged();
+        notifyObservers(level - 1);
     }
 
     /**
@@ -149,6 +176,9 @@ public abstract class Player {
      */
     public void receiveHP(final int hp) {
         this.hp += hp;
+        if (this.hp > getMaxHP()) {
+            this.hp = getMaxHP();
+        }
     }
 
     /**
@@ -181,8 +211,19 @@ public abstract class Player {
      * Method that receive XP from killed opponent.
      * @param opponent = the killed opponent by this player
      */
-    public void haveKilledOpponent(final Player opponent) {
+    public void receiveXPFromKilling(final Player opponent) {
         receiveXP(max(0, STEP_XP_KILL - (level - opponent.getLevel()) * MULTIPLIER_XP_KILL));
+    }
+
+    /**
+     * Method that possibly receive XP from killed opponent and notify observers.
+     * @param opponent = the killed opponent by this player
+     */
+    public void haveKilledOpponent(final Player opponent) {
+        setChanged();
+        notifyObservers(opponent);
+        if (this.hp > 0)
+            receiveXPFromKilling(opponent);
     }
 
     /**
@@ -212,6 +253,17 @@ public abstract class Player {
     }
 
     /**
+     * double dispatch: angel visits the player and notify Observers
+     */
+    public void acceptAngelMain(final Angel angel) {
+        if (this.getHp() > 0 ^ angel instanceof Spawner) {
+            setChanged();
+            notifyObservers(angel);
+        }
+        acceptAngel(angel);
+    }
+
+    /**
      * double dispatch: angel visits the player
      */
     public abstract void acceptAngel(final Angel angel);
@@ -234,4 +286,11 @@ public abstract class Player {
      * dinamically selects strategy
      */
     public abstract void selectStrategy();
+
+    /**
+     * applies selected strategy
+     */
+    public void playStrategy() {
+        this.strategy.applyStrategy(this);
+    }
 }

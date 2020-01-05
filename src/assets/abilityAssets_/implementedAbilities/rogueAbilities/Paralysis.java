@@ -36,8 +36,12 @@ public final class Paralysis implements Ability, SecondaryEffects {
 
         receiver.receiveDamage(Math.toIntExact(damage));
 
+        long subLevelDamage = subroundDamage + subroundLModifier * transmitter.getLevel();
+        long subDamage = Math.round(subLevelDamage
+                * Modifiers.getInstance().getModifiers(transmitter, receiver, gameMap, 1));
+
         overtimeEffects.put(receiver,
-                new PerpetualEffects(transmitter, receiver, gameMap, this,
+                new PerpetualEffects(receiver, Math.toIntExact(subDamage), this,
                  roundsToEndure
                          + (gameMap.getMapCell(position) == LandType.Woods ? bonusLandOvertime : 0),
                          SEffectType.Paralysis));
@@ -58,16 +62,8 @@ public final class Paralysis implements Ability, SecondaryEffects {
         }
     }
 
-    public void applySecondaryEffects(final Player transmitter, final int initialLevel,
-                                      final Player receiver,
-                                      final GameMap gameMap, final IntegerTulep initialPosition) {
-
-        long levelDamage = subroundDamage + subroundLModifier * initialLevel;
-        long damage = Math.round(levelDamage
-                * Modifiers.getInstance().
-                getModifiersWPOS(transmitter, receiver, gameMap, initialPosition, 1));
-
-        receiver.receiveDamage(Math.toIntExact(damage));
+    public void applySecondaryEffects(final Player receiver, final int initialDamage) {
+        receiver.receiveDamage(initialDamage);
     }
 
     public static Paralysis getInstance() {
